@@ -23,7 +23,7 @@ default: &default
 
 development:
   <<: *default
-  database: trampinginfo_development
+  database: trampinginfo_dev
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
