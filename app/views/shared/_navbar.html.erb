@@ -1,0 +1,42 @@
+<!--Navbar-->
+<nav class="navbar navbar-expand-md amber lighten-4 mb-4 navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <!-- Navbar brand -->
+      <%= link_to "TracksInfo", root_path, class: "navbar-brand" %>
+    </div>
+    <!-- Collapse button -->
+    <button class="navbar-toggler first-button" type="button" data-toggle="collapse" data-target="#navbar"
+      aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon1"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbar">
+
+      <!-- Links -->
+      <ul class="nav navbar-nav ml-auto">
+        <li class="nav-item d-none d-md-block">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item d-none d-md-block">
+          <a class="nav-link" href="#">Features</a>
+        </li>
+        <li class="nav-item d-none d-md-block">
+          <%= link_to "Login", root_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item d-none d-md-block">
+          <%= link_to "Sign Up", root_path, class: "nav-link" %>
+        </li>
+        <!-- mobile view -->
+        <li class="nav-item d-md-none">
+          <a class="nav-link" href="#">Pricing</a>
+        </li>
+      </ul>
+      <!-- Links -->
+
+    </div>
+    <!-- Collapsible content -->
+  </div>
+</nav>
+<!--/.Navbar-->

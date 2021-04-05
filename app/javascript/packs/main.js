@@ -1,1 +1,5 @@
-console.log("main.js")
+$(function () {
+  $('.first-button').on('click', function () {
+    $('.animated-icon1').toggleClass('open');
+  });
+});
