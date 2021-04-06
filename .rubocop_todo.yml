@@ -104,7 +104,7 @@ Layout/SpaceInsideBlockBraces:
 # SupportedStyles: space, no_space, compact
 # SupportedStylesForEmptyBraces: space, no_space
 Layout/SpaceInsideHashLiteralBraces:
-  EnforcedStyle: no_space
+  EnforcedStyle: space
 
 # Offense count: 1
 # Cop supports --auto-correct.
