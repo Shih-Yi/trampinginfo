@@ -26,7 +26,10 @@ gem 'jbuilder', '~> 2.7'
 # gem 'image_processing', '~> 1.2'
 
 # Flexible authentication solution for Rails with Warden
-gem 'devise'
+gem 'devise', github: 'heartcombo/devise', branch: "master"
+# Facebook OAuth2 Strategy for OmniAuth
+gem 'omniauth-facebook'
+gem "omniauth-rails_csrf_protection", '~> 1.0'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false

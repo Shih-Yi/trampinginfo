@@ -32,6 +32,9 @@
         <li class="nav-item d-md-none">
           <a class="nav-link" href="#">Pricing</a>
         </li>
+        <li class="nav-item d-none d-md-block">
+          <%= link_to "Facebook", user_facebook_omniauth_authorize_path, method: :post, class: "btn btn-facebook btn-block" %>
+        </li>
       </ul>
       <!-- Links -->
 
