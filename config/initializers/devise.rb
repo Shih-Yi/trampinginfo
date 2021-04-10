@@ -244,7 +244,7 @@ Devise.setup do |config|
   # Turn scoped views on. Before rendering "sessions/new", it will first check for
   # "users/sessions/new". It's turned off by default because it's slower if you
   # are using only default views.
-  # config.scoped_views = false
+  config.scoped_views = true
 
   # Configure the default scope given to Warden. By default it's the first
   # devise role declared in your routes (usually :user).
@@ -274,7 +274,11 @@ Devise.setup do |config|
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
   fb_config = Rails.application.config_for(:facebook)
   config.omniauth :facebook, fb_config['app_id'], fb_config['app_secret'],
-                  scope: 'public_profile,email', info_fields: 'email,name'
+                  client_options: {
+                    site: "https://graph.facebook.com/v10.0",
+                    authorize_url: "https://www.facebook.com/v10.0/dialog/oauth"
+                  },
+                  scope: 'public_profile,email', info_fields: 'email,name,picture', image_size: { width: 500, height: 500 }
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
