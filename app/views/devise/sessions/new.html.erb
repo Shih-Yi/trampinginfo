@@ -9,31 +9,35 @@
           <h3><strong>Welcome</strong></h3>
         </div>
         <div class="login-body">
-          <form role="form" action="" method="post" class="login-form">
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <%= render "devise/shared/error_messages", resource: resource %>
             <div class="form-group ">
               <div class="pos-r">
-                <i class="fa fa-user"></i>
-                <input   id="form-username" type="text" name="form-username" placeholder="Username..." class="form-username form-control">
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email", class: "form-control" %>
               </div>
             </div>
             <div class="form-group">
               <div class="pos-r">
-                <i class="fa fa-lock"></i>
-                <input id="form-password" type="password" name="form-password" placeholder="Password..." class="form-password form-control" >
+                <%= f.password_field :password, autocomplete: "current-password", placeholder: "Password", class: "form-control" %>
               </div>
             </div>
             <div class="form-group text-right">
-              <a href="#" class="bold"> Forgot password?</a>
+              <% if devise_mapping.rememberable? %>
+                <div class="field">
+                  <%= f.check_box :remember_me %>
+                  <%= f.label :remember_me %>
+                </div>
+              <% end %>
             </div>
             <div class="form-group">
-              <button type="submit" class="btn btn-primary form-control"><strong>Sign in</strong></button>  
+              <button type="submit" class="btn btn-primary form-control"><strong>Sign in</strong></button>
             </div>
-            <%= link_to "Facebook", user_facebook_omniauth_authorize_path, method: :post, class: "btn btn-facebook btn-block" %>
-          </form>
+          <% end %>
+          <%= link_to "Facebook", user_facebook_omniauth_authorize_path, method: :post, class: "btn btn-facebook btn-block" %>
         </div> <!-- end  login-body -->
       </div><!-- end  login-content -->
       <div class="login-footer text-center template">
-        <h6>Don't have an account?<a href="#" class="bold"> Sign up for free</a></h6>
+        <%= render "devise/shared/links" %>
       </div>
     </div>  <!-- end  login-container -->
   </div>
