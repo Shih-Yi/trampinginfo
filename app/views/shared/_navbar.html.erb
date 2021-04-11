@@ -17,23 +17,26 @@
       <!-- Links -->
       <ul class="nav navbar-nav ml-auto">
         <li class="nav-item d-none d-md-block">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          <%= link_to "Search", search_path, class: "nav-link" %>
         </li>
-        <li class="nav-item d-none d-md-block">
-          <a class="nav-link" href="#">Features</a>
-        </li>
-        <li class="nav-item d-none d-md-block">
-          <%= link_to "Login", root_path, class: "nav-link" %>
-        </li>
-        <li class="nav-item d-none d-md-block">
-          <%= link_to "Sign Up", root_path, class: "nav-link" %>
-        </li>
+        <% if user_signed_in? %>
+          <li class="nav-item d-none d-md-block">
+            <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "nav-link" %>
+          </li>
+        <% else %>
+          <li class="nav-item d-none d-md-block">
+            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item d-none d-md-block">
+            <%= link_to "Sign Up", new_user_registration_path, class: "nav-link" %>
+          </li>
+        <% end %>
         <!-- mobile view -->
         <li class="nav-item d-md-none">
-          <a class="nav-link" href="#">Pricing</a>
+          <%= link_to "Login", new_user_session_path, class: "nav-link" %>
         </li>
-        <li class="nav-item d-none d-md-block">
-          <%= link_to "Facebook", user_facebook_omniauth_authorize_path, method: :post, class: "btn btn-facebook btn-block" %>
+        <li class="nav-item d-md-none">
+          <%= link_to "Sign Up", root_path, class: "nav-link" %>
         </li>
       </ul>
       <!-- Links -->
