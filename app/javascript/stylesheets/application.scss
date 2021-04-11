@@ -1,6 +1,11 @@
 @import "~bootstrap/scss/bootstrap";
 
+// libraries
+@import 'toastr/build/toastr.min';
+
+// tools
 @import "tools/vars";
 
+// custom
 @import "main";
 @import "navbar";

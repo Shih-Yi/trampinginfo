@@ -10,14 +10,6 @@ import "channels"
 
 import "bootstrap"
 import "@fortawesome/fontawesome-free/js/all"
-
-// scss
-import "../stylesheets/application"
-import '../stylesheets/users/sessions'
-
-// js
-import "./main"
-
 import $ from 'jquery'
 window.jQuery = $;
 window.$ = $;
@@ -26,6 +18,18 @@ document.addEventListener("turbolinks:load", () => {
   $('[data-toggle="tooltip"]').tooltip()
   $('[data-toggle="popover"]').popover()
 })
+
+// libraries
+// toast notifications
+import toastr from 'toastr';
+window.toastr = toastr;
+
+// scss
+import "../stylesheets/application"
+import '../stylesheets/users/sessions'
+
+// custom js
+import "./main"
 
 Rails.start()
 Turbolinks.start()
