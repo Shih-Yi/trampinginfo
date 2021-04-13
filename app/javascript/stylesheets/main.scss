@@ -315,15 +315,20 @@ a {
 
 // SEARCH
 #main {
-    height: 100%;
-    overflow: hidden;
+  height: 100%;
+  overflow: hidden;
+}
+
+.content-float, html, body {
+  height: 98%;
 }
 
 #left {
-  width: 400px;
-  padding: 10px 20px 10px 20px;
+  
   overflow: scroll;
   height: 100%;
+  float: left;
+  
 }
 
 #right {
