@@ -31,6 +31,9 @@ gem 'devise', github: 'heartcombo/devise', branch: "master"
 gem 'omniauth-facebook'
 gem "omniauth-rails_csrf_protection", '~> 1.0'
 
+# react with rails
+gem 'react_on_rails', '12.2.0'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
