@@ -1,0 +1,138 @@
+import React, { Component } from 'react';
+
+class SearchResults extends Component {
+  constructor(props) {
+    super(props)
+    this.state={
+      getData: false,
+      items: [],
+      tracks: new Object(),
+      map: null,
+    }
+    this.getSearchResults = this.getSearchResults.bind(this)
+    this.boundsChangedResult = this.boundsChangedResult.bind(this)
+  }
+
+  initMap = (responseJson) => {
+    let map;
+    let datas;
+    let markers;
+    let setTracks = new Object();
+
+    for (let element of responseJson.features) {
+      setTracks[element.properties.OBJECTID] = element
+    }
+    this.setState({ tracks: setTracks })
+
+    map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 5.5,
+      center: { lat: -40.9006, lng: 174.8860 },
+    });
+    this.setState({ map: map })
+
+    markers = [];
+    datas = this.state.map.data.addGeoJson(responseJson);
+    this.state.map.data.setStyle({
+      strokeColor: 'green',
+      strokeOpacity: '1.0'
+    });
+
+    for (var i = 0; i < Object.keys(this.state.tracks).length; i++) {
+      const data = datas[i];
+      const lat = data.getGeometry().getAt(0).g[0].lat();
+      const lng = data.getGeometry().getAt(0).g[0].lng();
+      const marker = new google.maps.Marker({
+        position: { lat: lat, lng: lng }, label: ""+data.getProperty('OBJECTID')+""
+      });
+        const infowindow = new google.maps.InfoWindow({
+            content: data.getProperty('OBJECTID') + ": "+ "<p>Marker Location: " + marker.getPosition() + "</p>",
+        });
+        google.maps.event.addListener(marker, "click", () => {
+            console.log(marker)
+            infowindow.open(this.state.map, marker);
+        });
+      markers.push(marker);
+    }
+
+    this.boundsChangedResult(this.state.map, this.state.tracks, this);
+
+    new MarkerClusterer(this.state.map, markers, {
+      imagePath:
+      "https://raw.githubusercontent.com/googlemaps/js-markerclustererplus/main/images/m",
+    });
+  }
+
+  boundsChangedResult = (map, tracks, self) => {
+    google.maps.event.addListener(map, 'bounds_changed', function() {
+      let bounds = map.getBounds();
+      let maxLat = bounds.getNorthEast().lat();
+      let minLat = bounds.getSouthWest().lat();
+      let maxLng = bounds.getNorthEast().lng();
+      let minLng = bounds.getSouthWest().lng();
+
+      if (maxLng < 0) {
+        maxLng += 360
+      }
+
+      let filteredObject = Object.keys(tracks).reduce(function(r, ele) {
+        if (tracks[ele].geometry.coordinates[0][0][1] >= Number(minLat) &&
+            tracks[ele].geometry.coordinates[0][0][1] <= Number(maxLat) &&
+            tracks[ele].geometry.coordinates[0][0][0] >= Number(minLng) &&
+            tracks[ele].geometry.coordinates[0][0][0] <= Number(maxLng)) {
+
+            r[ele] = tracks[ele]
+        }
+          return r;
+      }, {})
+      self.setState({items: Object.values(filteredObject), getData: true})
+    })
+  }
+
+  getSearchResults = () => {
+    fetch('data.json', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    })
+      .then(function(response){
+        return response.json();
+      })
+      .then(result => {
+        this.initMap(result);
+        this.setState({items: result.features, getData: true})
+      })
+  }
+
+  componentDidMount(){
+    this.getSearchResults();
+  }
+
+  render() {
+    let { getData, items } = this.state;
+    if (getData)
+      return(
+        items.map(item => (
+          <div className="card mb-4 shadow-sm">
+            <img className="card-img-top" data-src="" src={item.properties.introductionThumbnail} data-holder-rendered="true"></img>
+            <div className="card-body">
+                <p className="card-text">{item.properties.name}</p>
+                <div className="d-flex justify-content-between align-items-center">
+                  <div className="btn-group">
+                    <button type="button" className="btn btn-sm btn-outline-secondary">View</button>
+                    <button type="button" className="btn btn-sm btn-outline-secondary">Edit</button>
+                  </div>
+                  <small className="text-muted">9 mins</small>
+                </div>
+            </div>
+          </div>
+        ))
+      );
+    else
+      return(
+        <div id="">讀取中</div>
+      );
+  }
+}
+
+export default SearchResults;
