@@ -53,8 +53,8 @@ class SearchResults extends Component {
         });
       markers.push(marker);
     }
-
-    this.boundsChangedResult(this.state.map, this.state.tracks, this);
+    console.log(this)
+    this.boundsChangedResult(this.state.map, this.state.tracks);
 
     new MarkerClusterer(this.state.map, markers, {
       imagePath:
@@ -62,7 +62,8 @@ class SearchResults extends Component {
     });
   }
 
-  boundsChangedResult = (map, tracks, self) => {
+  boundsChangedResult = (map, tracks) => {
+    let self = this
     google.maps.event.addListener(map, 'bounds_changed', function() {
       let bounds = map.getBounds();
       let maxLat = bounds.getNorthEast().lat();
@@ -73,7 +74,7 @@ class SearchResults extends Component {
       if (maxLng < 0) {
         maxLng += 360
       }
-
+      console.log(maxLat, maxLng, minLat, minLng)
       let filteredObject = Object.keys(tracks).reduce(function(r, ele) {
         if (tracks[ele].geometry.coordinates[0][0][1] >= Number(minLat) &&
             tracks[ele].geometry.coordinates[0][0][1] <= Number(maxLat) &&
@@ -85,6 +86,7 @@ class SearchResults extends Component {
           return r;
       }, {})
       self.setState({items: Object.values(filteredObject), getData: true})
+      console.log(Object.keys(filteredObject).length)
     })
   }
 
