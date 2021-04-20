@@ -115,7 +115,7 @@ class SearchResults extends Component {
     if (getData)
       return(
         items.map(item => (
-          <div className="card mb-4 shadow-sm">
+          <div key={item.properties.OBJECTID} className="card mb-4 shadow-sm">
             <img className="card-img-top" data-src="" src={item.properties.introductionThumbnail} data-holder-rendered="true"></img>
             <div className="card-body">
                 <p className="card-text">{item.properties.name}</p>
