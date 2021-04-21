@@ -9,7 +9,7 @@ class SearchHeader extends Component {
 
   render () {
     return (
-      <div className="card mb-4 shadow-sm search-header">
+      <div className="card mb-4 shadow-sm search-header rounded-box">
         <div className="card-body">
           <p className="card-text">Found Tracks ({this.props.searchResultsNumber})</p>
         </div>

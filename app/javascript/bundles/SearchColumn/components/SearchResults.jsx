@@ -166,8 +166,8 @@ class SearchResults extends Component {
       return(
         <div>
           {pageItems.map(item => (
-            <div key={item.properties.OBJECTID} className="card mb-4 shadow-sm">
-              <img className="card-img-top" data-src="" src={item.properties.introductionThumbnail} data-holder-rendered="true"></img>
+            <div key={item.properties.OBJECTID} className="card mb-4 shadow-sm rounded-box">
+              <img className="card-img card-img-rounded" data-src="" src={item.properties.introductionThumbnail} data-holder-rendered="true"></img>
               <div className="card-body">
                   <p className="card-text">{item.properties.name}</p>
                   <div className="d-flex justify-content-between align-items-center">

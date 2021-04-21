@@ -343,11 +343,19 @@ a {
   flex-wrap: wrap;
 }
 
-.search-header {
-  .card-text {
-    font-size: large;
-    font-weight: bold;
-    color: #00A699;
+.search-column{
+  .search-header {
+    .card-text {
+      font-size: large;
+      font-weight: bold;
+      color: #00A699;
+    }
+  }
+  .rounded-box{
+    border-radius: 0.9rem;
+  }
+  .card-img-rounded{
+    border-radius: 0.9rem 0.9rem 0rem 0rem;
   }
 }
 
