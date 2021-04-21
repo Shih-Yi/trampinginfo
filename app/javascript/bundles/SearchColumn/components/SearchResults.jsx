@@ -18,6 +18,7 @@ class SearchResults extends Component {
     this.addDataToMap = this.addDataToMap.bind(this)
     this.getSearchResults = this.getSearchResults.bind(this)
     this.boundsChangedResult = this.boundsChangedResult.bind(this)
+    this.mouseoverTrackStyle = this.mouseoverTrackStyle.bind(this)
     this.handleNextPage = this.handleNextPage.bind(this)
   }
 
@@ -59,6 +60,7 @@ class SearchResults extends Component {
     }
 
     this.boundsChangedResult(this.state.map, this.state.tracks);
+    this.mouseoverTrackStyle(this.state.map);
 
     new MarkerClusterer(this.state.map, markers, {
       imagePath:
@@ -99,6 +101,15 @@ class SearchResults extends Component {
       self.props.updateResultsNumber(Object.keys(filteredObject).length)
       self.handleNextPage(1);
     })
+  }
+
+  mouseoverTrackStyle = (map) => {
+    map.data.addListener('mousemove', function(event) {
+      map.data.overrideStyle(event.feature, {strokeColor: 'red', strokeOpacity: '1'});
+    });
+    map.data.addListener('mouseout', function(event) {
+      map.data.overrideStyle(event.feature, {strokeOpacity: '0' });
+    });
   }
 
   getSearchResults = () => {
