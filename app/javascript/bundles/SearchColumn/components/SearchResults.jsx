@@ -158,7 +158,7 @@ class SearchResults extends Component {
   }
 
   render() {
-    let { isLoading, items, pageItems, totalPages } = this.state;
+    let { isLoading, pageItems, totalPages } = this.state;
 
     if (isLoading)
       return(
