@@ -2,20 +2,20 @@ import React, { Component } from 'react';
 import Pagination from '../../AppPagination'
 
 let infowindow = null;
+let perPage = 10;
 class SearchResults extends Component {
   constructor(props) {
     super(props)
-    this.state={
-      isLoading: false,
-      items: [],
-      tracks: new Object(),
-      map: null,
+    this.state = {
       activePage: 1,
-      perPage: 10,
       totalPages: 0,
+      isLoading: false,
+      map: null,
+      responseTracks: [],
+      tracksObjWithId: new Object(),
       pageItems: [],
       markers: [],
-      datas: [],
+      mapFeatures: [],
     }
     this.initMap = this.initMap.bind(this)
     this.addDataToMap = this.addDataToMap.bind(this)
@@ -36,16 +36,16 @@ class SearchResults extends Component {
   }
 
   addDataToMap = (responseJson) => {
-    let { markers, datas } = this.state;
+    let { markers, mapFeatures, tracksObjWithId } = this.state;
 
-    datas = this.state.map.data.addGeoJson(responseJson);
+    mapFeatures = this.state.map.data.addGeoJson(responseJson);
     this.state.map.data.setStyle({
       strokeColor: 'green',
       strokeOpacity: '0'
     });
 
-    for (var i = 0; i < Object.keys(this.state.tracks).length; i++) {
-      const data = datas[i];
+    for (var i = 0; i < Object.keys(tracksObjWithId).length; i++) {
+      const data = mapFeatures[i];
       const lat = data.getGeometry().getAt(0).g[0].lat();
       const lng = data.getGeometry().getAt(0).g[0].lng();
       const marker = new google.maps.Marker({
@@ -62,11 +62,11 @@ class SearchResults extends Component {
     }
 
     let setFeatures = new Object();
-    for (let element of datas) {
+    for (let element of mapFeatures) {
       setFeatures[element.getProperty("OBJECTID")] = element
     }
-    this.setState({ datas: setFeatures })
-    this.boundsChangedResult(this.state.map, this.state.tracks);
+    this.setState({ mapFeatures: setFeatures })
+    this.boundsChangedResult(this.state.map, tracksObjWithId);
     this.mouseoverTrackStyle(this.state.map);
 
     new MarkerClusterer(this.state.map, markers, {
@@ -75,8 +75,7 @@ class SearchResults extends Component {
     });
   }
 
-  boundsChangedResult = (map, tracks) => {
-    let { perPage } = this.state;
+  boundsChangedResult = (map, tracksObjWithId) => {
     let self = this
 
     google.maps.event.addListener(map, 'bounds_changed', function() {
@@ -90,17 +89,17 @@ class SearchResults extends Component {
         maxLng += 360
       }
       console.log(maxLat, maxLng, minLat, minLng)
-      let filteredObject = Object.keys(tracks).reduce(function(r, ele) {
-        if (tracks[ele].geometry.coordinates[0][0][1] >= Number(minLat) &&
-            tracks[ele].geometry.coordinates[0][0][1] <= Number(maxLat) &&
-            tracks[ele].geometry.coordinates[0][0][0] >= Number(minLng) &&
-            tracks[ele].geometry.coordinates[0][0][0] <= Number(maxLng)) {
+      let filteredObject = Object.keys(tracksObjWithId).reduce(function(r, ele) {
+        if (tracksObjWithId[ele].geometry.coordinates[0][0][1] >= Number(minLat) &&
+            tracksObjWithId[ele].geometry.coordinates[0][0][1] <= Number(maxLat) &&
+            tracksObjWithId[ele].geometry.coordinates[0][0][0] >= Number(minLng) &&
+            tracksObjWithId[ele].geometry.coordinates[0][0][0] <= Number(maxLng)) {
 
-          r[ele] = tracks[ele]
+          r[ele] = tracksObjWithId[ele]
         }
-          return r;
+        return r;
       }, {})
-      self.setState({ items: Object.values(filteredObject),
+      self.setState({ responseTracks: Object.values(filteredObject),
                       isLoading: true,
                       activePage: 1,
                       totalPages: Math.ceil(Object.keys(filteredObject).length/perPage)
@@ -120,10 +119,10 @@ class SearchResults extends Component {
   }
 
   cardShowTrackEvent = (event) => {
-    let { map, markers, datas } = this.state;
+    let { map, markers, mapFeatures } = this.state;
     let target = event.target.closest(".result-item")
     let objId = target.dataset.key
-    map.data.overrideStyle(datas[objId], {strokeColor: 'green', strokeOpacity: '1'});
+    map.data.overrideStyle(mapFeatures[objId], {strokeColor: 'green', strokeOpacity: '1'});
     google.maps.event.trigger(markers[0], "click");
     markers[0].setAnimation(google.maps.Animation.BOUNCE);
     setTimeout(function () {
@@ -132,10 +131,10 @@ class SearchResults extends Component {
   }
 
   cardDisableTrackEvent = (event) => {
-    let { map, datas } = this.state;
+    let { map, mapFeatures } = this.state;
     let target = event.target.closest(".result-item")
     let objId = target.dataset.key
-    map.data.overrideStyle(datas[objId], {strokeColor: 'green', strokeOpacity: '0'});
+    map.data.overrideStyle(mapFeatures[objId], {strokeColor: 'green', strokeOpacity: '0'});
     infowindow.close();
   }
 
@@ -149,20 +148,19 @@ class SearchResults extends Component {
       .then(function(response){
         return response.json();
       })
-      .then(result => {
-        let { perPage } = this.state;
+      .then(responseJson => {
         let setTracks = new Object();
 
-        for (let element of result.features) {
+        for (let element of responseJson.features) {
           setTracks[element.properties.OBJECTID] = element
         }
 
-        this.setState({ tracks: setTracks,
-                        items: result.features,
+        this.setState({ tracksObjWithId: setTracks,
+                        responseTracks: responseJson.features,
                         isLoading: true,
-                        totalPages: Math.ceil(result.features.length/perPage)
+                        totalPages: Math.ceil(responseJson.features.length/perPage)
                       })
-        this.addDataToMap(result);
+        this.addDataToMap(responseJson);
         this.props.updateResultsNumber(Object.keys(setTracks).length)
         this.handleNextPage(1);
       })
@@ -174,12 +172,11 @@ class SearchResults extends Component {
   }
 
   handleNextPage(activePage) {
-    let { perPage } = this.state;
-    let { items, tracks } = this.state;
+    let { responseTracks, tracksObjWithId } = this.state;
     let firstItem = activePage == 1 ? 0 : (activePage - 1) * perPage
     let lastItem = activePage * perPage
-    let slicedItems = Object.keys(items).slice(firstItem, lastItem).reduce((result, key) => {
-      result[key] = items[key];
+    let slicedItems = Object.keys(responseTracks).slice(firstItem, lastItem).reduce((result, key) => {
+      result[key] = responseTracks[key];
       return result;
     }, {});
 
@@ -188,10 +185,10 @@ class SearchResults extends Component {
       sets[value.properties.OBJECTID] = value
     }
 
-    let filtered = Object.keys(tracks)
+    let filtered = Object.keys(tracksObjWithId)
                      .filter(key => Object.keys(sets).includes(key))
                     .reduce((obj, key) => {
-                      obj[key] = tracks[key];
+                      obj[key] = tracksObjWithId[key];
                       return obj;
                     }, {});
     this.setState({ pageItems: Object.values(filtered), isLoading: true, activePage:  activePage })
