@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Pagination from '../../AppPagination'
 
+let infowindow = null;
 class SearchResults extends Component {
   constructor(props) {
     super(props)
@@ -13,6 +14,8 @@ class SearchResults extends Component {
       perPage: 10,
       totalPages: 0,
       pageItems: [],
+      markers: [],
+      datas: [],
     }
     this.initMap = this.initMap.bind(this)
     this.addDataToMap = this.addDataToMap.bind(this)
@@ -33,13 +36,12 @@ class SearchResults extends Component {
   }
 
   addDataToMap = (responseJson) => {
-    let datas;
-    let markers = [];
+    let { markers, datas } = this.state;
 
     datas = this.state.map.data.addGeoJson(responseJson);
     this.state.map.data.setStyle({
       strokeColor: 'green',
-      strokeOpacity: '1.0'
+      strokeOpacity: '0'
     });
 
     for (var i = 0; i < Object.keys(this.state.tracks).length; i++) {
@@ -49,7 +51,7 @@ class SearchResults extends Component {
       const marker = new google.maps.Marker({
         position: { lat: lat, lng: lng }, label: ""+data.getProperty('OBJECTID')+""
       });
-        const infowindow = new google.maps.InfoWindow({
+        infowindow = new google.maps.InfoWindow({
             content: data.getProperty('OBJECTID') + ": "+ "<p>Marker Location: " + marker.getPosition() + "</p>",
         });
         google.maps.event.addListener(marker, "click", () => {
@@ -59,6 +61,11 @@ class SearchResults extends Component {
       markers.push(marker);
     }
 
+    let setFeatures = new Object();
+    for (let element of datas) {
+      setFeatures[element.getProperty("OBJECTID")] = element
+    }
+    this.setState({ datas: setFeatures })
     this.boundsChangedResult(this.state.map, this.state.tracks);
     this.mouseoverTrackStyle(this.state.map);
 
@@ -110,6 +117,26 @@ class SearchResults extends Component {
     map.data.addListener('mouseout', function(event) {
       map.data.overrideStyle(event.feature, {strokeOpacity: '0' });
     });
+  }
+
+  cardShowTrackEvent = (event) => {
+    let { map, markers, datas } = this.state;
+    let target = event.target.closest(".result-item")
+    let objId = target.dataset.key
+    map.data.overrideStyle(datas[objId], {strokeColor: 'green', strokeOpacity: '1'});
+    google.maps.event.trigger(markers[0], "click");
+    markers[0].setAnimation(google.maps.Animation.BOUNCE);
+    setTimeout(function () {
+        markers[0].setAnimation(null);
+    }, 1400);
+  }
+
+  cardDisableTrackEvent = (event) => {
+    let { map, datas } = this.state;
+    let target = event.target.closest(".result-item")
+    let objId = target.dataset.key
+    map.data.overrideStyle(datas[objId], {strokeColor: 'green', strokeOpacity: '0'});
+    infowindow.close();
   }
 
   getSearchResults = () => {
@@ -172,12 +199,11 @@ class SearchResults extends Component {
 
   render() {
     let { isLoading, pageItems, totalPages } = this.state;
-
     if (isLoading)
       return(
         <div>
           {pageItems.map(item => (
-            <div key={item.properties.OBJECTID} className="card mb-4 shadow-sm rounded-box">
+            <div key={item.properties.OBJECTID} className="card mb-4 shadow-sm rounded-box result-item" data-key={item.properties.OBJECTID} onMouseOver={this.cardShowTrackEvent} onMouseOut={this.cardDisableTrackEvent}>
               <img className="card-img card-img-rounded" data-src="" src={item.properties.introductionThumbnail} data-holder-rendered="true"></img>
               <div className="card-body">
                   <p className="card-text">{item.properties.name}</p>
@@ -193,7 +219,7 @@ class SearchResults extends Component {
           ))}
 
           {totalPages > 1 &&
-            <div className="pagination-wrap">
+            <div className="pagination-wrap d-flex justify-content-center">
               <Pagination
                 totalPages={totalPages}
                 currentPage={this.state.activePage}

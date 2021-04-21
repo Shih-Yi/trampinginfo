@@ -17,7 +17,7 @@ class SearchColumn extends Component {
 
   render () {
     return (
-      <div class="search-column">
+      <div className="search-column">
         <SearchHeader searchResultsNumber={this.state.searchResultsNumber} />
         <SearchResults updateResultsNumber={this.updatSearchResultsNumber} />
       </div>
