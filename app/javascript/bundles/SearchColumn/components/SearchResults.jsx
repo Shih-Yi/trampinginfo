@@ -96,6 +96,7 @@ class SearchResults extends Component {
                       activePage: 1,
                       totalPages: Math.ceil(Object.keys(filteredObject).length/perPage)
                     })
+      self.props.updateResultsNumber(Object.keys(filteredObject).length)
       self.handleNextPage(1);
     })
   }
@@ -124,6 +125,7 @@ class SearchResults extends Component {
                         totalPages: Math.ceil(result.features.length/perPage)
                       })
         this.addDataToMap(result);
+        this.props.updateResultsNumber(Object.keys(setTracks).length)
         this.handleNextPage(1);
       })
   }

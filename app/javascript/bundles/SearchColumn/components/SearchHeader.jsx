@@ -9,9 +9,9 @@ class SearchHeader extends Component {
 
   render () {
     return (
-      <div className="card mb-4 shadow-sm">
+      <div className="card mb-4 shadow-sm search-header">
         <div className="card-body">
-          <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+          <p className="card-text">Found Tracks ({this.props.searchResultsNumber})</p>
         </div>
       </div>
     )
