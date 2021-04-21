@@ -16,7 +16,9 @@ export default class AppPagination extends Component {
 
   onClick(event) {
     const a = event.target;
-    const pageNumber = a.dataset.value ? parseInt(a.dataset.value, 10) : parseInt(a.parentNode.dataset.value, 10);
+    const pageNumber = a.dataset.value ? parseInt(a.dataset.value, 10) : a.parentNode.dataset.value ? parseInt(a.parentNode.dataset.value, 10) : false;
+
+    if (!pageNumber) { return false }
 
     if (typeof this.props.onChange === 'function') {
       this.props.onChange(pageNumber);
