@@ -124,7 +124,8 @@ class SearchResults extends Component {
                       activePage: 1,
                       totalPages: Math.ceil(Object.keys(filteredObject).length/perPage)
                     })
-      self.props.updateResultsNumber(Object.keys(filteredObject).length)
+      self.props.updatSearchResultsNumber(Object.keys(filteredObject).length)
+      self.props.setIsLoading(self.state.isLoading)
       self.handleNextPage(1);
     })
   }
@@ -181,7 +182,8 @@ class SearchResults extends Component {
                         totalPages: Math.ceil(responseJson.features.length/perPage)
                       })
         this.addDataToMap(responseJson);
-        this.props.updateResultsNumber(Object.keys(setTracks).length)
+        this.props.updatSearchResultsNumber(Object.keys(setTracks).length)
+        this.props.setIsLoading(this.state.isLoading)
         this.handleNextPage(1);
       })
   }
@@ -192,7 +194,7 @@ class SearchResults extends Component {
   }
 
   handleNextPage(activePage) {
-    let { responseTracks, tracksObjWithId } = this.state;
+    let { responseTracks, tracksObjWithId, isLoading } = this.state;
     let firstItem = activePage == 1 ? 0 : (activePage - 1) * perPage
     let lastItem = activePage * perPage
     let slicedItems = Object.keys(responseTracks).slice(firstItem, lastItem).reduce((result, key) => {
@@ -212,6 +214,7 @@ class SearchResults extends Component {
                       return obj;
                     }, {});
     this.setState({ pageItems: Object.values(filtered), isLoading: true, activePage:  activePage })
+    this.props.setIsLoading(isLoading)
   }
 
   render() {

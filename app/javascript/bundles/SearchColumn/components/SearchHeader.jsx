@@ -8,10 +8,11 @@ class SearchHeader extends Component {
   }
 
   render () {
+    let { isLoading, searchResultsNumber } = this.props
     return (
       <div className="card mb-4 shadow-sm search-header rounded-box">
         <div className="card-body">
-          <p className="card-text">Found Tracks ({this.props.searchResultsNumber})</p>
+          <p className="card-text">Found Tracks {isLoading && '(' + searchResultsNumber + ')'}</p>
         </div>
       </div>
     )

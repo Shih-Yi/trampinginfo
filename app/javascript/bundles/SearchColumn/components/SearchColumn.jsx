@@ -6,9 +6,15 @@ class SearchColumn extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isLoading: false,
       searchResultsNumber: null,
     }
+    this.setIsLoading = this.setIsLoading.bind(this);
     this.updatSearchResultsNumber = this.updatSearchResultsNumber.bind(this);
+  }
+
+  setIsLoading(isLoading) {
+    this.setState({ isLoading: isLoading });
   }
 
   updatSearchResultsNumber(number) {
@@ -16,10 +22,11 @@ class SearchColumn extends Component {
   }
 
   render () {
+    let { isLoading, searchResultsNumber } = this.state
     return (
       <div className="search-column">
-        <SearchHeader searchResultsNumber={this.state.searchResultsNumber} />
-        <SearchResults updateResultsNumber={this.updatSearchResultsNumber} />
+        <SearchHeader isLoading={isLoading} searchResultsNumber={searchResultsNumber} />
+        <SearchResults setIsLoading={this.setIsLoading} updatSearchResultsNumber={this.updatSearchResultsNumber} />
       </div>
     )
   }
