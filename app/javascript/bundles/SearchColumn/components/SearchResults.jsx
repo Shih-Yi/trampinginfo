@@ -55,7 +55,7 @@ class SearchResults extends Component {
 
     let objMarkers = new Object();
     for (let element of markers) {
-      objMarkers[parseInt(element.getLabel())] = element
+      objMarkers[parseInt(element.labelClass)] = element
     }
     markersObjWithId = objMarkers
 
@@ -74,7 +74,7 @@ class SearchResults extends Component {
     let lat = data.getGeometry().getAt(0).g[0].lat();
     let lng = data.getGeometry().getAt(0).g[0].lng();
     marker = new google.maps.Marker({
-      position: { lat: lat, lng: lng }, label: "" + data.getProperty('OBJECTID') + ""
+      position: { lat: lat, lng: lng }, labelClass: "" + data.getProperty('OBJECTID') + "",
     });
 
     google.maps.event.addListener(marker, 'mouseover', () => {
