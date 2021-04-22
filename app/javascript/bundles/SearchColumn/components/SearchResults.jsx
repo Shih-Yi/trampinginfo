@@ -3,6 +3,7 @@ import Pagination from '../../AppPagination'
 
 let infowindow = null;
 let perPage = 10;
+let map, mapFeatures;
 class SearchResults extends Component {
   constructor(props) {
     super(props)
@@ -10,12 +11,10 @@ class SearchResults extends Component {
       activePage: 1,
       totalPages: 0,
       isLoading: false,
-      map: null,
       responseTracks: [],
       tracksObjWithId: new Object(),
       pageItems: [],
       markers: [],
-      mapFeatures: [],
     }
     this.initMap = this.initMap.bind(this)
     this.addDataToMap = this.addDataToMap.bind(this)
@@ -26,20 +25,17 @@ class SearchResults extends Component {
   }
 
   initMap = () => {
-    let map;
-
     map = new google.maps.Map(document.getElementById("info-map"), {
       zoom: 5.5,
       center: { lat: -40.9006, lng: 174.8860 },
     });
-    this.setState({ map: map })
   }
 
   addDataToMap = (responseJson) => {
-    let { markers, mapFeatures, tracksObjWithId } = this.state;
+    let { markers, tracksObjWithId } = this.state;
 
-    mapFeatures = this.state.map.data.addGeoJson(responseJson);
-    this.state.map.data.setStyle({
+    mapFeatures = map.data.addGeoJson(responseJson);
+    map.data.setStyle({
       strokeColor: 'green',
       strokeOpacity: '0'
     });
@@ -55,8 +51,7 @@ class SearchResults extends Component {
             content: data.getProperty('OBJECTID') + ": "+ "<p>Marker Location: " + marker.getPosition() + "</p>",
         });
         google.maps.event.addListener(marker, "click", () => {
-            console.log(marker)
-            infowindow.open(this.state.map, marker);
+            infowindow.open(map, marker);
         });
       markers.push(marker);
     }
@@ -65,11 +60,11 @@ class SearchResults extends Component {
     for (let element of mapFeatures) {
       setFeatures[element.getProperty("OBJECTID")] = element
     }
-    this.setState({ mapFeatures: setFeatures })
-    this.boundsChangedResult(this.state.map, tracksObjWithId);
-    this.mouseoverTrackStyle(this.state.map);
+    mapFeatures = setFeatures
+    this.boundsChangedResult(map, tracksObjWithId);
+    this.mouseoverTrackStyle(map);
 
-    new MarkerClusterer(this.state.map, markers, {
+    new MarkerClusterer(map, markers, {
       imagePath:
       "https://raw.githubusercontent.com/googlemaps/js-markerclustererplus/main/images/m",
     });
@@ -119,7 +114,7 @@ class SearchResults extends Component {
   }
 
   cardShowTrackEvent = (event) => {
-    let { map, markers, mapFeatures } = this.state;
+    let { markers } = this.state;
     let target = event.target.closest(".result-item")
     let objId = target.dataset.key
     map.data.overrideStyle(mapFeatures[objId], {strokeColor: 'green', strokeOpacity: '1'});
@@ -131,7 +126,6 @@ class SearchResults extends Component {
   }
 
   cardDisableTrackEvent = (event) => {
-    let { map, mapFeatures } = this.state;
     let target = event.target.closest(".result-item")
     let objId = target.dataset.key
     map.data.overrideStyle(mapFeatures[objId], {strokeColor: 'green', strokeOpacity: '0'});
