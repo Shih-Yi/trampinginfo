@@ -4,6 +4,7 @@ import Pagination from '../../AppPagination'
 let perPage = 10;
 let map, mapFeatures, markersObjWithId;
 let infowindow;
+let allTracks = [];
 class SearchResults extends Component {
   constructor(props) {
     super(props)
@@ -159,6 +160,20 @@ class SearchResults extends Component {
     map.data.overrideStyle(mapFeatures[objId], {strokeColor: 'green', strokeOpacity: '0'});
   }
 
+  inputOnChange = e => {
+    let filteredTracks = allTracks.filter(track => {
+      return track.properties.name.toLowerCase().indexOf(e.target.value.toLowerCase()) !== -1;
+    });
+    let page = filteredTracks.length == 0 ?  0 : Math.ceil(filteredTracks.length/perPage)
+    this.setState({ responseTracks: filteredTracks,
+      isLoading: true,
+      activePage: 1,
+      totalPages: page
+    }, () => this.handleNextPage(1));
+    this.props.updatSearchResultsNumber(filteredTracks.length)
+    this.props.setIsLoading(this.state.isLoading)
+  }
+
   getSearchResults = () => {
     fetch('data.json', {
       headers: {
@@ -171,6 +186,7 @@ class SearchResults extends Component {
       })
       .then(responseJson => {
         let setTracks = new Object();
+        allTracks = responseJson.features
 
         for (let element of responseJson.features) {
           setTracks[element.properties.OBJECTID] = element
@@ -222,6 +238,10 @@ class SearchResults extends Component {
     if (isLoading)
       return(
         <div>
+          <div className="form-group">
+            <label>Search:</label>
+            <input type="text" className="form-control" id="usr" onChange={this.inputOnChange} />
+          </div>
           {pageItems.map(item => (
             <div key={item.properties.OBJECTID} className="card mb-4 shadow-sm rounded-box result-item" data-key={item.properties.OBJECTID} onMouseOver={this.cardShowTrackEvent} onMouseOut={this.cardDisableTrackEvent}>
               <img className="card-img card-img-rounded" data-src="" src={item.properties.introductionThumbnail} data-holder-rendered="true"></img>
