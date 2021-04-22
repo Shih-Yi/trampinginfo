@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Pagination from '../../AppPagination'
 
 let perPage = 10;
-let map, mapFeatures, markersObjWithId;
-let infowindow;
+let map, mapFeatures, mapFeaturesWithId, markersObjWithId;
+let infowindow, markerClusterer;
 let allTracks = [];
 class SearchResults extends Component {
   constructor(props) {
@@ -51,7 +51,7 @@ class SearchResults extends Component {
     for (let element of mapFeatures) {
       setFeatures[element.getProperty("OBJECTID")] = element
     }
-    mapFeatures = setFeatures
+    mapFeaturesWithId = setFeatures
 
     let objMarkers = new Object();
     for (let element of markers) {
@@ -62,7 +62,7 @@ class SearchResults extends Component {
     this.boundsChangedResult(map, tracksObjWithId);
     this.mouseoverTrackStyle(map);
 
-    new MarkerClusterer(map, markers, {
+    markerClusterer = new MarkerClusterer(map, markers, {
       imagePath:
       "/m",
     });
@@ -143,7 +143,7 @@ class SearchResults extends Component {
   cardShowTrackEvent = (event) => {
     let target = event.target.closest(".result-item")
     let objId = target.dataset.key
-    let feature = mapFeatures[objId]
+    let feature = mapFeaturesWithId[objId]
     let marker = markersObjWithId[objId]
 
     map.data.overrideStyle(feature, {strokeColor: 'red', strokeOpacity: '1'});
@@ -157,21 +157,57 @@ class SearchResults extends Component {
   cardDisableTrackEvent = (event) => {
     let target = event.target.closest(".result-item")
     let objId = target.dataset.key
-    map.data.overrideStyle(mapFeatures[objId], {strokeColor: 'green', strokeOpacity: '0'});
+    map.data.overrideStyle(mapFeaturesWithId[objId], {strokeColor: 'green', strokeOpacity: '0'});
   }
 
   inputOnChange = e => {
+    let { markers } = this.state;
+    this.setMapOnAll(null);
+    markers = []
+    markerClusterer.clearMarkers();
+
     let filteredTracks = allTracks.filter(track => {
       return track.properties.name.toLowerCase().indexOf(e.target.value.toLowerCase()) !== -1;
     });
     let page = filteredTracks.length == 0 ?  0 : Math.ceil(filteredTracks.length/perPage)
+
+    let setTracks = new Object();
+    for (let element of filteredTracks) {
+      setTracks[element.properties.OBJECTID] = element
+    }
+
+    let filtered = Object.keys(mapFeaturesWithId)
+                         .filter(key => Object.keys(setTracks).includes(key))
+                         .reduce((obj, key) => {
+                           obj[key] = mapFeaturesWithId[key];
+                           return obj;
+                         }, {});
+    for (var i = 0; i < Object.keys(setTracks).length; i++) {
+      this.setMarkers(Object.values(filtered), markers, i)
+    }
+
     this.setState({ responseTracks: filteredTracks,
       isLoading: true,
       activePage: 1,
-      totalPages: page
+      totalPages: page,
+      markers: markers,
     }, () => this.handleNextPage(1));
+
+    this.boundsChangedResult(map, setTracks);
     this.props.updatSearchResultsNumber(filteredTracks.length)
     this.props.setIsLoading(this.state.isLoading)
+
+    markerClusterer = new MarkerClusterer(map, markers, {
+      imagePath:
+      "/m",
+    });
+  }
+
+  setMapOnAll = (map) => {
+    let { markers } = this.state;
+    for (let i = 0; i < markers.length; i++) {
+      markers[i].setMap(map);
+    }
   }
 
   getSearchResults = () => {
