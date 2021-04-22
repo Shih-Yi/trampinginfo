@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Pagination from '../../AppPagination'
 
-let infowindow = null;
 let perPage = 10;
-let map, mapFeatures;
+let map, mapFeatures, markersObjWithId;
+let infowindow;
 class SearchResults extends Component {
   constructor(props) {
     super(props)
@@ -40,20 +40,10 @@ class SearchResults extends Component {
       strokeOpacity: '0'
     });
 
+    infowindow = new google.maps.InfoWindow();
+
     for (var i = 0; i < Object.keys(tracksObjWithId).length; i++) {
-      const data = mapFeatures[i];
-      const lat = data.getGeometry().getAt(0).g[0].lat();
-      const lng = data.getGeometry().getAt(0).g[0].lng();
-      const marker = new google.maps.Marker({
-        position: { lat: lat, lng: lng }, label: ""+data.getProperty('OBJECTID')+""
-      });
-        infowindow = new google.maps.InfoWindow({
-            content: data.getProperty('OBJECTID') + ": "+ "<p>Marker Location: " + marker.getPosition() + "</p>",
-        });
-        google.maps.event.addListener(marker, "click", () => {
-            infowindow.open(map, marker);
-        });
-      markers.push(marker);
+      this.setMarkers(mapFeatures, markers, i)
     }
 
     let setFeatures = new Object();
@@ -61,6 +51,13 @@ class SearchResults extends Component {
       setFeatures[element.getProperty("OBJECTID")] = element
     }
     mapFeatures = setFeatures
+
+    let objMarkers = new Object();
+    for (let element of markers) {
+      objMarkers[parseInt(element.getLabel())] = element
+    }
+    markersObjWithId = objMarkers
+
     this.boundsChangedResult(map, tracksObjWithId);
     this.mouseoverTrackStyle(map);
 
@@ -68,6 +65,34 @@ class SearchResults extends Component {
       imagePath:
       "https://raw.githubusercontent.com/googlemaps/js-markerclustererplus/main/images/m",
     });
+  }
+
+  setMarkers = (mapFeatures, markers, i) => {
+    let marker = null
+    let data = mapFeatures[i];
+    let lat = data.getGeometry().getAt(0).g[0].lat();
+    let lng = data.getGeometry().getAt(0).g[0].lng();
+    marker = new google.maps.Marker({
+      position: { lat: lat, lng: lng }, label: "" + data.getProperty('OBJECTID') + ""
+    });
+
+    google.maps.event.addListener(marker, 'mouseover', () => {
+      if (infowindow) {
+        infowindow.close();
+      }
+      infowindow.setContent("<div style='float:left'>" +
+                            "<img src='" + data.getProperty('introductionThumbnail') + "'>" +
+                            "</div>" +
+                            "<div style='float:right; padding:10px; font-weight:bold;'>" +
+                              "<div style='font-size:large;'>"+ data.getProperty('name') +"</div><br/>" +
+                              "<div style='font-size:medium;'>" + data.getProperty('difficulty') + "</div><br/>" +
+                              "<div style='font-size:medium;'>" + data.getProperty('completionTime') + "</div>" +
+                            "</div>")
+
+    infowindow.setPosition({ lat: lat, lng: lng });
+      infowindow.open(map, marker);
+    });
+    markers.push(marker);
   }
 
   boundsChangedResult = (map, tracksObjWithId) => {
@@ -114,14 +139,16 @@ class SearchResults extends Component {
   }
 
   cardShowTrackEvent = (event) => {
-    let { markers } = this.state;
     let target = event.target.closest(".result-item")
     let objId = target.dataset.key
-    map.data.overrideStyle(mapFeatures[objId], {strokeColor: 'green', strokeOpacity: '1'});
-    google.maps.event.trigger(markers[0], "click");
-    markers[0].setAnimation(google.maps.Animation.BOUNCE);
-    setTimeout(function () {
-        markers[0].setAnimation(null);
+    let feature = mapFeatures[objId]
+    let marker = markersObjWithId[objId]
+
+    map.data.overrideStyle(feature, {strokeColor: 'red', strokeOpacity: '1'});
+    google.maps.event.trigger(marker, 'mouseover');
+    marker.setAnimation(google.maps.Animation.BOUNCE);
+    setTimeout(() => {
+      marker.setAnimation(null);
     }, 1400);
   }
 
@@ -129,7 +156,6 @@ class SearchResults extends Component {
     let target = event.target.closest(".result-item")
     let objId = target.dataset.key
     map.data.overrideStyle(mapFeatures[objId], {strokeColor: 'green', strokeOpacity: '0'});
-    infowindow.close();
   }
 
   getSearchResults = () => {
