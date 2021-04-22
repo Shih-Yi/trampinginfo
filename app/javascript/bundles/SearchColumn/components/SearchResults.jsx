@@ -63,7 +63,7 @@ class SearchResults extends Component {
 
     new MarkerClusterer(map, markers, {
       imagePath:
-      "https://raw.githubusercontent.com/googlemaps/js-markerclustererplus/main/images/m",
+      "/m",
     });
   }
 
