@@ -63,7 +63,7 @@ class SearchResults extends Component {
     }
     markersObjWithId = objMarkers
 
-    this.boundsChangedResult(map, tracksObjWithId);
+    // this.boundsChangedResult(map, tracksObjWithId);
     this.mouseoverTrackStyle(map);
 
     markerClusterer = new MarkerClusterer(map, markers, {
