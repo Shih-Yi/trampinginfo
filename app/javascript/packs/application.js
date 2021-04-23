@@ -22,6 +22,7 @@ $(function () {
 // libraries
 // toast notifications
 import 'semantic-ui-css/semantic.min.css'
+import 'react-vertical-timeline-component/style.min.css';
 import toastr from 'toastr';
 window.toastr = toastr;
 
