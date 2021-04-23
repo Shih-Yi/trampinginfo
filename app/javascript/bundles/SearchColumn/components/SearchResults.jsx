@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Pagination from '../../AppPagination'
 import gsap from "gsap";
 import MarkerClusterer from '@googlemaps/markerclustererplus';
+import { Search, Grid } from 'semantic-ui-react'
 
 let perPage = 10;
 let map, mapFeatures, mapFeaturesWithId, markersObjWithId;
@@ -284,11 +285,15 @@ class SearchResults extends Component {
     if (isLoading)
       return(
         <div>
-          <div className="form-group">
-            <label>Search:</label>
-            <input type="text" className="form-control" id="usr" onChange={this.inputOnChange} />
-          </div>
+          <Grid>
+            <Grid.Column>
+              <Search showNoResults={false} onSearchChange={this.inputOnChange} />
+            </Grid.Column>
+          </Grid>
+
+          <Grid relaxed columns={2}>
           {pageItems.map(item => (
+            <Grid.Column>
             <div key={item.properties.OBJECTID} className="card mb-4 shadow-sm rounded-box result-item" data-key={item.properties.OBJECTID} onMouseOver={this.cardShowTrackEvent} onMouseOut={this.cardDisableTrackEvent}>
               <img className="card-img card-img-rounded" data-src="" src={item.properties.introductionThumbnail} data-holder-rendered="true"></img>
               <div className="card-body">
@@ -302,8 +307,9 @@ class SearchResults extends Component {
                   </div>
               </div>
             </div>
+            </Grid.Column>
           ))}
-
+          </Grid>
           {totalPages > 1 &&
             <div className="pagination-wrap d-flex justify-content-center">
               <Pagination
