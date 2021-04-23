@@ -7,6 +7,7 @@ let perPage = 10;
 let map, mapFeatures, mapFeaturesWithId, markersObjWithId;
 let infowindow, markerClusterer;
 let allTracks = [];
+let boundsChangedListener;
 class SearchResults extends Component {
   constructor(props) {
     super(props)
@@ -101,7 +102,7 @@ class SearchResults extends Component {
   boundsChangedResult = (map, tracksObjWithId) => {
     let self = this
 
-    google.maps.event.addListener(map, 'bounds_changed', function() {
+    boundsChangedListener = google.maps.event.addListener(map, 'bounds_changed', function() {
       let bounds = map.getBounds();
       let maxLat = bounds.getNorthEast().lat();
       let minLat = bounds.getSouthWest().lat();
@@ -195,7 +196,7 @@ class SearchResults extends Component {
       markers: markers,
     }, () => this.handleNextPage(1));
 
-    this.boundsChangedResult(map, setTracks);
+    google.maps.event.removeListener(boundsChangedListener);
     this.props.updatSearchResultsNumber(filteredTracks.length)
     this.props.setIsLoading(this.state.isLoading)
 
