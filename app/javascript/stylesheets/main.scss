@@ -1,6 +1,6 @@
 body {
   color: #565a5c;
-  background-color: #F8F8F8;
+  background-color: $body-backgraound-color;
   font-family: "Varela Round", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 }
 
@@ -28,7 +28,7 @@ a {
 
 // NAVBARS
 .navbar-default {
-  background-color: #FFFFFF;
+  background-color: $nav-backgraound-color;
 }
 
 .navbar-default .navbar-brand {
