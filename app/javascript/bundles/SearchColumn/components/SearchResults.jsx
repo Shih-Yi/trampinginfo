@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Pagination from '../../AppPagination'
 import gsap from "gsap";
+import MarkerClusterer from '@googlemaps/markerclustererplus';
 
 let perPage = 10;
 let map, mapFeatures, mapFeaturesWithId, markersObjWithId;

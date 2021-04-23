@@ -913,6 +913,11 @@
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free/-/fontawesome-free-5.15.3.tgz#c36ffa64a2a239bf948541a97b6ae8d729e09a9a"
   integrity sha512-rFnSUN/QOtnOAgqFRooTA3H57JLDm0QEG/jPdk+tLQNL/eWd+Aok8g3qCI+Q1xuDPWpGW/i9JySpJVsq8Q0s9w==
 
+"@googlemaps/markerclustererplus@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@googlemaps/markerclustererplus/-/markerclustererplus-1.1.0.tgz#7f48a2fafca14b68f300b0b34d437b57cf2188f5"
+  integrity sha512-Y5jiaoMzhUQ8tCyJzvV5/+6VYF154eeczPZKqQ6kdINoL6Jui4DzVPNPitWFjXmPL9UDkBoxu0PLxOQQGvNWug==
+
 "@npmcli/move-file@^1.0.1":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@npmcli/move-file/-/move-file-1.1.2.tgz#1a82c3e372f7cae9253eb66d72543d6b8685c674"
