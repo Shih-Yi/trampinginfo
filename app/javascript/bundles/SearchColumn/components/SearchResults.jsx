@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Pagination from '../../AppPagination'
+import gsap from "gsap";
 
 let perPage = 10;
 let map, mapFeatures, mapFeaturesWithId, markersObjWithId;
@@ -243,6 +244,13 @@ class SearchResults extends Component {
   componentDidMount(){
     this.initMap();
     this.getSearchResults();
+    gsap.to("circle", {
+      duration: 0.6,
+      opacity: 0.2,
+      scale: 1.4,
+      ease: "sine.inOut",
+      stagger: { yoyo: true, repeat: -1, each: 0.4 }
+    });
   }
 
   handleNextPage(activePage) {
@@ -307,7 +315,13 @@ class SearchResults extends Component {
       );
     else
       return(
-        <div id="">讀取中</div>
+        <div id="searchLoading">
+          <svg viewBox="0 0 500 200">
+            <circle cx="200" cy="50" r="50" />
+            <circle cx="50" cy="50" r="50" />
+            <circle cx="350" cy="50" r="50" />
+          </svg>
+        </div>
       );
   }
 }
