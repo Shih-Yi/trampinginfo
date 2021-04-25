@@ -292,7 +292,9 @@ class SearchResults extends Component {
           {pageItems.map(item => (
             <Grid.Column>
             <div key={item.properties.OBJECTID} className="card mb-4 shadow-sm rounded-box result-item" data-key={item.properties.OBJECTID} onMouseOver={this.cardShowTrackEvent} onMouseOut={this.cardDisableTrackEvent}>
-              <img className="card-img card-img-rounded" data-src="" src={item.properties.introductionThumbnail} data-holder-rendered="true"></img>
+              <a href={`/tracks/${item.properties.OBJECTID}`}>
+                <img className="card-img card-img-rounded" data-src="" src={item.properties.introductionThumbnail} data-holder-rendered="true"></img>
+              </a>
               <div className="card-body">
                   <p className="card-text">{item.properties.name}</p>
                   <div className="d-flex justify-content-between align-items-center">
