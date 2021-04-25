@@ -36,6 +36,9 @@
         <% end %>
         <!-- mobile view -->
         <li class="nav-item d-md-none">
+          <%= link_to "Search", search_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item d-md-none">
           <%= link_to "Login", new_user_session_path, class: "nav-link" %>
         </li>
         <li class="nav-item d-md-none">
