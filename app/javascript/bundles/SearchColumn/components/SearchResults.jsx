@@ -107,7 +107,7 @@ class SearchResults extends Component {
       if (maxLng < 0) {
         maxLng += 360
       }
-      console.log(maxLat, maxLng, minLat, minLng)
+
       let filteredObject = Object.keys(tracksObjWithId).reduce(function(r, ele) {
         if (tracksObjWithId[ele].geometry.coordinates[0][0][1] >= Number(minLat) &&
             tracksObjWithId[ele].geometry.coordinates[0][0][1] <= Number(maxLat) &&
@@ -162,14 +162,15 @@ class SearchResults extends Component {
   }
 
   inputOnChange = e => {
-    let { map } = this.props
+    let { map, searchInput } = this.props
     let { markers } = this.state;
     this.setMapOnAll(null);
     markers = []
     markerClusterer.clearMarkers();
-
+    let inpuText = e ? e.target.value : searchInput.split('=').pop()
+    if (!e) { $('#searchInput').val(inpuText) }
     let filteredTracks = allTracks.filter(track => {
-      return track.properties.name.toLowerCase().indexOf(e.target.value.toLowerCase()) !== -1;
+      return track.properties.name.toLowerCase().indexOf(inpuText.toLowerCase()) !== -1;
     });
     let page = filteredTracks.length == 0 ?  0 : Math.ceil(filteredTracks.length/perPage)
 
@@ -223,6 +224,7 @@ class SearchResults extends Component {
         return response.json();
       })
       .then(responseJson => {
+        let { searchInput } = this.props
         let setTracks = new Object();
         allTracks = responseJson.features
 
@@ -239,6 +241,9 @@ class SearchResults extends Component {
         this.props.updatSearchResultsNumber(Object.keys(setTracks).length)
         this.props.setIsLoading(this.state.isLoading)
         this.handleNextPage(1);
+        if (searchInput) {
+          this.inputOnChange();
+        }
       })
   }
 
@@ -284,7 +289,7 @@ class SearchResults extends Component {
         <div>
           <Grid>
             <Grid.Column>
-              <Search showNoResults={false} onSearchChange={this.inputOnChange} />
+              <Search id="searchInput" showNoResults={false} onSearchChange={this.inputOnChange} />
             </Grid.Column>
           </Grid>
 
