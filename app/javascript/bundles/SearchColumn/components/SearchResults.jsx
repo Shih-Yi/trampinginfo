@@ -214,7 +214,7 @@ class SearchResults extends Component {
   }
 
   getSearchResults = () => {
-    fetch('data.json', {
+    fetch('tracks_data.json', {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
