@@ -5,7 +5,7 @@ import MarkerClusterer from '@googlemaps/markerclustererplus';
 import { Search, Grid } from 'semantic-ui-react'
 
 let perPage = 10;
-let map, mapFeatures, mapFeaturesWithId, markersObjWithId;
+let mapFeatures, mapFeaturesWithId, markersObjWithId;
 let infowindow, markerClusterer;
 let allTracks = [];
 let boundsChangedListener;
@@ -21,7 +21,6 @@ class SearchResults extends Component {
       pageItems: [],
       markers: [],
     }
-    this.initMap = this.initMap.bind(this)
     this.addDataToMap = this.addDataToMap.bind(this)
     this.getSearchResults = this.getSearchResults.bind(this)
     this.boundsChangedResult = this.boundsChangedResult.bind(this)
@@ -29,14 +28,8 @@ class SearchResults extends Component {
     this.handleNextPage = this.handleNextPage.bind(this)
   }
 
-  initMap = () => {
-    map = new google.maps.Map(document.getElementById("info-map"), {
-      zoom: 5.5,
-      center: { lat: -40.9006, lng: 174.8860 },
-    });
-  }
-
   addDataToMap = (responseJson) => {
+    let { map } = this.props
     let { markers, tracksObjWithId } = this.state;
 
     mapFeatures = map.data.addGeoJson(responseJson);
@@ -64,7 +57,7 @@ class SearchResults extends Component {
     markersObjWithId = objMarkers
 
     // this.boundsChangedResult(map, tracksObjWithId);
-    this.mouseoverTrackStyle(map);
+    this.mouseoverTrackStyle();
 
     markerClusterer = new MarkerClusterer(map, markers, {
       imagePath:
@@ -73,6 +66,7 @@ class SearchResults extends Component {
   }
 
   setMarkers = (mapFeatures, markers, i) => {
+    let { map } = this.props
     let marker = null
     let data = mapFeatures[i];
     let lat = data.getGeometry().getAt(0).g[0].lat();
@@ -135,7 +129,8 @@ class SearchResults extends Component {
     })
   }
 
-  mouseoverTrackStyle = (map) => {
+  mouseoverTrackStyle = () => {
+    let { map } = this.props
     map.data.addListener('mousemove', function(event) {
       map.data.overrideStyle(event.feature, {strokeColor: 'red', strokeOpacity: '1'});
     });
@@ -145,6 +140,7 @@ class SearchResults extends Component {
   }
 
   cardShowTrackEvent = (event) => {
+    let { map } = this.props
     let target = event.target.closest(".result-item")
     let objId = target.dataset.key
     let feature = mapFeaturesWithId[objId]
@@ -159,12 +155,14 @@ class SearchResults extends Component {
   }
 
   cardDisableTrackEvent = (event) => {
+    let { map } = this.props
     let target = event.target.closest(".result-item")
     let objId = target.dataset.key
     map.data.overrideStyle(mapFeaturesWithId[objId], {strokeColor: 'green', strokeOpacity: '0'});
   }
 
   inputOnChange = e => {
+    let { map } = this.props
     let { markers } = this.state;
     this.setMapOnAll(null);
     markers = []
@@ -245,7 +243,6 @@ class SearchResults extends Component {
   }
 
   componentDidMount(){
-    this.initMap();
     this.getSearchResults();
     gsap.to("circle", {
       duration: 0.6,
