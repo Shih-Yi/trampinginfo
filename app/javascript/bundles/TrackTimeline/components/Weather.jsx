@@ -3,8 +3,7 @@ import { Grid, Image, Statistic } from 'semantic-ui-react'
 import w1 from '../../../image/w1.png';
 import w2 from '../../../image/w2.png';
 import w3 from '../../../image/w3.png';
-
-class TrackTimeline extends Component {
+class Weather extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -68,4 +67,4 @@ class TrackTimeline extends Component {
   }
 }
 
-export default TrackTimeline;
+export default Weather;
