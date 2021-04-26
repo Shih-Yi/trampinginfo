@@ -75,8 +75,13 @@ a {
 }
 
 .btn.btn-normal {
+  color: white;
   border: 1px solid #ff5a5f;
   background-color: #ff5a5f;
+  &:hover {
+    color: white;
+    background-color: #ff7275; /* Green */
+  }
 }
 
 .btn.btn-normal:active {

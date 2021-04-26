@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
+import { Button } from 'semantic-ui-react'
 
 const LandingPage = (props) => {
   const [ searchInput, setSearchInput ] = useState('')
@@ -25,7 +25,7 @@ const LandingPage = (props) => {
       <div className="row">
         <div className="col-md-4 col-md-offset-4">
           <Link to={{ pathname: "/search", search: `searchInput=${searchInput}` }} className="text-link">
-            <Button variant="primary" bsPrefix="btn btn-normal btn-block">
+            <Button className='btn btn-normal btn-block'>
               Search
             </Button>
           </Link>
