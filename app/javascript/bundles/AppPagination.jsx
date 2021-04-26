@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import PaginationInternal from './PaginationInternal';
+import { Pagination } from 'semantic-ui-react'
 import PropTypes from 'prop-types';
 
 export default class AppPagination extends Component {
   static propTypes = {
-    currentPage: PropTypes.number.isRequired,
+    activePage: PropTypes.number.isRequired,
     totalPages: PropTypes.number.isRequired,
-    onChange: PropTypes.func
+    handleNextPage: PropTypes.func
   };
 
   constructor(props) {
@@ -16,24 +16,22 @@ export default class AppPagination extends Component {
 
   onClick(event) {
     const a = event.target;
-    const pageNumber = a.dataset.value ? parseInt(a.dataset.value, 10) : a.parentNode.dataset.value ? parseInt(a.parentNode.dataset.value, 10) : false;
+    const pageNumber = a.getAttribute("value") ? parseInt(a.getAttribute("value"), 10) : false
 
     if (!pageNumber) { return false }
-
-    if (typeof this.props.onChange === 'function') {
-      this.props.onChange(pageNumber);
+    if (typeof this.props.handleNextPage === 'function') {
+      this.props.handleNextPage(pageNumber);
     }
   }
 
   render() {
-    const {currentPage, totalPages} = this.props;
+    const {activePage, totalPages} = this.props;
 
     return (
-      <PaginationInternal
-        currentPage={currentPage}
+      <Pagination
+        activePage={activePage}
         totalPages={totalPages}
         onClick={this.onClick}
-        hidePreviousAndNextPageLinks
       />
     );
   }

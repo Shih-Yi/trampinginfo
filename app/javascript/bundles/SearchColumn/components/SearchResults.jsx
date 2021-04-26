@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Pagination from '../../AppPagination'
+import AppPagination from '../../AppPagination'
 import gsap from "gsap";
 import MarkerClusterer from '@googlemaps/markerclustererplus';
 import { Search, Grid } from 'semantic-ui-react'
@@ -316,10 +316,10 @@ class SearchResults extends Component {
           </Grid>
           {totalPages > 1 &&
             <div className="pagination-wrap d-flex justify-content-center">
-              <Pagination
+              <AppPagination
                 totalPages={totalPages}
-                currentPage={this.state.activePage}
-                onChange={this.handleNextPage}
+                activePage={this.state.activePage}
+                handleNextPage={this.handleNextPage}
               />
             </div>
           }
