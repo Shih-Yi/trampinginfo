@@ -15,5 +15,9 @@ Rails.application.routes.draw do
 
   get 'search', to: 'home#search'
 
-  resources :tracks
+  resources :tracks do
+    resources :reports do
+    end
+  end
+
 end

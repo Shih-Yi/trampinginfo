@@ -6,6 +6,7 @@ class User < ApplicationRecord
          :timeoutable, :trackable, :omniauthable, omniauth_providers: [:facebook]
   # relationships .............................................................
   has_many :auth_providers, dependent: :destroy
+  has_many :reports
 
   # class methods .............................................................
   def self.from_omniauth(auth)
