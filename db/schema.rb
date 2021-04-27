@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 2021_04_26_065117) do
 
   create_table "reports", force: :cascade do |t|
     t.bigint "track_id"
+    t.bigint "user_id"
     t.string "report_type"
     t.text "location"
     t.text "description"
@@ -35,11 +36,11 @@ ActiveRecord::Schema.define(version: 2021_04_26_065117) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "avatar"
     t.index ["track_id"], name: "index_reports_on_track_id"
+    t.index ["user_id"], name: "index_reports_on_user_id"
   end
 
   create_table "tracks", force: :cascade do |t|
-    t.bigint "user_id"
-    t.string "object_id"
+    t.string "object_key"
     t.string "name"
     t.text "introduction"
     t.string "difficulty"
@@ -49,7 +50,6 @@ ActiveRecord::Schema.define(version: 2021_04_26_065117) do
     t.decimal "longitude", precision: 10, scale: 6
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_tracks_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -71,5 +71,5 @@ ActiveRecord::Schema.define(version: 2021_04_26_065117) do
   end
 
   add_foreign_key "reports", "tracks"
-  add_foreign_key "tracks", "users"
+  add_foreign_key "reports", "users"
 end
