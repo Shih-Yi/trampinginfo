@@ -14,7 +14,7 @@ class TrackTimeline extends Component {
     return (
     <div>
       <VerticalTimeline layout={'1-column-left'}>
-        {JSON.parse(reports).map(report => (
+        {reports.map(report => (
           <VerticalTimelineElement
             position={'right'}
             className="vertical-timeline-element--work"

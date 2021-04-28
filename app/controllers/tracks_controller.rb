@@ -4,6 +4,7 @@ class TracksController < ApplicationController
 
   def show
     @report = Report.new
+    @reports = @track.reports.to_json
   end
 
   private
