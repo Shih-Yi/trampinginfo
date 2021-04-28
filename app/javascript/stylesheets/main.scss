@@ -55,6 +55,10 @@ a {
   padding: 9px 27px;
 }
 
+.btn-black {
+  color: rgb(86, 90, 92);
+}
+
 .btn-small {
   padding: 5px 15px;
   margin-top: 15px;
@@ -253,7 +257,16 @@ a {
   text-decoration: none;
 }
 
-// PHOTO UPLOAD
+// PHOTO
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
 .btn-file {
   position: relative;
   overflow: hidden;
