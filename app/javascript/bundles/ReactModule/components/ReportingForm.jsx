@@ -6,6 +6,7 @@ class ReportingForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      report_type: '',
       selectedFile: null
     }
   }
@@ -14,6 +15,10 @@ class ReportingForm extends Component {
     this.setState({
       selectedFile: event.target.files[0],
     })
+  }
+
+  onTypeChange = event => {
+    this.setState({report_type: event.target.value})
   }
 
   onClickHandler = () => {
@@ -34,11 +39,11 @@ class ReportingForm extends Component {
       <Form>
         <Form.Field>
           <label>Type</label>
-          <input placeholder='type' />
+          <input name="report_type" className="report_aaa" placeholder='type' onChange={this.onTypeChange} />
         </Form.Field>
         <Form.Field>
           <label>Position</label>
-          <input placeholder='position' />
+          <input label="position" placeholder='position' onChange={this.onChangeHandler} />
         </Form.Field>
         <label>Image</label>
         <Input type="file" className="inputfile" onChange={this.onChangeHandler} id="embedpollfileinput" />
