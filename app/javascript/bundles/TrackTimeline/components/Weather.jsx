@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
-import { Grid, Image, Statistic } from 'semantic-ui-react'
-import w1 from '../../../image/w1.png';
-import w2 from '../../../image/w2.png';
-import w3 from '../../../image/w3.png';
+import { Grid, Statistic } from 'semantic-ui-react'
+import WeatherIcon from './WeatherIcon'
 
-const align = {
-  'margin-left': 'auto',
-  'margin-right': 'auto',
-  'display': 'block',
-}
+const weatherData = {}
+const weatherDailyData = weatherData.daily
+
 class Weather extends Component {
   constructor(props) {
     super(props);
@@ -29,41 +25,15 @@ class Weather extends Component {
         </Grid.Row>
 
         <Grid.Row columns={5}>
-          <Grid.Column>
-            <Image src={w1} size='tiny' style={align} />
-            <Statistic size='mini' style={align}>
-              <Statistic.Value>27C</Statistic.Value>
-              <Statistic.Label>Jun 02 Wed</Statistic.Label>
-            </Statistic>
-          </Grid.Column>
-          <Grid.Column>
-            <Image src={w2} size='tiny' style={align} />
-            <Statistic size='mini'>
-              <Statistic.Value>27C</Statistic.Value>
-              <Statistic.Label>Jun 02 Wed</Statistic.Label>
-            </Statistic>
-          </Grid.Column>
-          <Grid.Column>
-            <Image src={w3} size='tiny' style={align} />
-            <Statistic size='mini'>
-              <Statistic.Value>27C</Statistic.Value>
-              <Statistic.Label>Jun 02 Wed</Statistic.Label>
-            </Statistic>
-          </Grid.Column>
-          <Grid.Column>
-            <Image src={w2} size='tiny' style={align} />
-            <Statistic size='mini'>
-              <Statistic.Value>27C</Statistic.Value>
-              <Statistic.Label>Jun 02 Wed</Statistic.Label>
-            </Statistic>
-          </Grid.Column>
-          <Grid.Column>
-            <Image src={w1} size='tiny' style={align} />
-            <Statistic size='mini'>
-              <Statistic.Value>27C</Statistic.Value>
-              <Statistic.Label>Jun 02 Wed</Statistic.Label>
-            </Statistic>
-          </Grid.Column>
+          {weatherDailyData.map(item => (
+            <Grid.Column>
+              <WeatherIcon weatherCode={item.weather[0].id} dayOrNight="night" />
+              <Statistic size='mini'>
+                <Statistic.Value>{item.temp.day}</Statistic.Value>
+                <Statistic.Label>Jun 02 Wed</Statistic.Label>
+              </Statistic>
+            </Grid.Column>
+          ))}
         </Grid.Row>
       </Grid>
     </div>
