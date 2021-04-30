@@ -29,6 +29,13 @@
 /config/master.key
 /config/facebook.yml
 
+# gem 'config' setting
+config/settings.yml
+config/settings.local.yml
+config/settings/*
+config/settings/*.local.yml
+config/environments/*.local.yml
+
 /public/packs
 /public/packs-test
 /node_modules
