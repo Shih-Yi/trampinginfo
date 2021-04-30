@@ -50,8 +50,11 @@ const Weather = (props) => {
       .then((response) => {
         const dataArray = response.data.daily.slice(0, 5)
         setWeatherDailyData(dataArray)
+        // after setLocalStorageExpiry dataArray.length will become 6, so as weatherDailyData
+        // so use new variable newDataArray
+        const newDataArray = response.data.daily.slice(0, 5)
         // catche weatherDailyData for 6 hours
-        setLocalStorageExpiry('weatherDailyData', dataArray, 60*60*6*1000)
+        setLocalStorageExpiry(`weatherDailyData_${track.id}`, newDataArray, 60*60*6*1000)
       });
   }
 
