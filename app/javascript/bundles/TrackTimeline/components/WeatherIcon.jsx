@@ -18,8 +18,8 @@ import NightAtmosphere from '../../../image/weatherIcons/night/night-atmosphere.
 
 
 const align = {
-  'margin-left': 'auto',
-  'margin-right': 'auto',
+  'marginLeft': 'auto',
+  'marginRight': 'auto',
   'display': 'block',
 }
 

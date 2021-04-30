@@ -1,20 +1,65 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Grid, Statistic } from 'semantic-ui-react'
 import WeatherIcon from './WeatherIcon'
+import axios from 'axios';
 
-const weatherData = {}
-const weatherDailyData = weatherData.daily
+const align = {
+  'marginLeft': 'auto',
+  'marginRight': 'auto',
+  'display': 'block',
+}
 
-class Weather extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+const setLocalStorageExpiry = (key, array, ttl) => {
+  array.push({'expiry': new Date().getTime() + ttl})
+  localStorage.setItem(key, JSON.stringify(array));
+}
+
+const isLocalStorageExpiry = (key) => {
+  const array = localStorage.getItem(key)
+  if (!array) return false
+
+  const newArray = JSON.parse(array)
+  if (new Date().getTime() > newArray.slice(-1)[0].expiry) {
+      localStorage.removeItem(key)
+      return false
+  } else {
+      return newArray
+  }
+}
+
+const Weather = (props) => {
+  const { weatherdd } = props
+  const storageWeatherDailyData = isLocalStorageExpiry('weatherDailyData');
+  console.log('--- invoke function component ---');
+  let [weatherDailyData, setWeatherDailyData] = useState([])
+  // let [backupWeatherDailyData, setBackupWeatherDailyData] = useState([])
+
+  useEffect(() => {
+    console.log('execute function in useEffect');
+    if (storageWeatherDailyData) {
+      const dailyData = storageWeatherDailyData.slice(0, 5)
+      setWeatherDailyData(dailyData)
+    } else {
+      feathWeatherData();
     }
+  }, []);
+
+  const feathWeatherData = () => {
+    const lat = "-41.113155"
+    const lon = "172.106092"
+    const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&&units=metric&appid=${weatherdd}`
+    axios.get(url)
+      .then((response) => {
+        const dataArray = response.data.daily.slice(0, 5)
+        setWeatherDailyData(dataArray)
+        // catche weatherDailyData for 6 hours
+        setLocalStorageExpiry('weatherDailyData', dataArray, 60*60*6*1000)
+      });
   }
 
-  render () {
-    return (
+  return (
     <div>
+      {console.log('render-------------------')}
       <Grid verticalAlign='middle' divided='vertically' centered>
         <Grid.Row columns={1}>
           <Grid.Column >
@@ -27,18 +72,21 @@ class Weather extends Component {
         <Grid.Row columns={5}>
           {weatherDailyData.map(item => (
             <Grid.Column>
-              <WeatherIcon weatherCode={item.weather[0].id} dayOrNight="night" />
-              <Statistic size='mini'>
-                <Statistic.Value>{item.temp.day}</Statistic.Value>
-                <Statistic.Label>Jun 02 Wed</Statistic.Label>
+              <Statistic size='mini' style={align}>
+                <Statistic.Label>
+                  {new Intl.DateTimeFormat('en', { dateStyle: 'full'}).format(new Date(item.dt*1000)).substr(0,3)}
+                </Statistic.Label>
+              </Statistic>
+              <WeatherIcon weatherCode={item.weather[0].id} dayOrNight="day" />
+              <Statistic size='mini' style={align}>
+                <Statistic.Value>{`${Math.round(item.temp.max)}°`} / {`${Math.round(item.temp.min)}°`}</Statistic.Value>
               </Statistic>
             </Grid.Column>
           ))}
         </Grid.Row>
       </Grid>
     </div>
-    )
-  }
+  )
 }
 
 export default Weather;
