@@ -28,8 +28,8 @@ const isLocalStorageExpiry = (key) => {
 }
 
 const Weather = (props) => {
-  const { weatherdd } = props
-  const storageWeatherDailyData = isLocalStorageExpiry('weatherDailyData');
+  const { track, weatherdd } = props
+  const storageWeatherDailyData = isLocalStorageExpiry(`weatherDailyData_${track.id}`);
   console.log('--- invoke function component ---');
   let [weatherDailyData, setWeatherDailyData] = useState([])
   // let [backupWeatherDailyData, setBackupWeatherDailyData] = useState([])
@@ -45,9 +45,7 @@ const Weather = (props) => {
   }, []);
 
   const feathWeatherData = () => {
-    const lat = "-41.113155"
-    const lon = "172.106092"
-    const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&&units=metric&appid=${weatherdd}`
+    const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${track.latitude}&lon=${track.longitude}&&units=metric&appid=${weatherdd}`
     axios.get(url)
       .then((response) => {
         const dataArray = response.data.daily.slice(0, 5)
@@ -59,7 +57,6 @@ const Weather = (props) => {
 
   return (
     <div>
-      {console.log('render-------------------')}
       <Grid verticalAlign='middle' divided='vertically' centered>
         <Grid.Row columns={1}>
           <Grid.Column >

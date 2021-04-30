@@ -13,7 +13,7 @@ class ReportsController < ApplicationController
   private
 
   def set_track
-    @track = Track.find(params[:id])
+    @track = Track.find(params[:track_id])
   end
 
   def report_params

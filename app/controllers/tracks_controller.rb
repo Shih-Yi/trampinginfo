@@ -1,8 +1,9 @@
 class TracksController < ApplicationController
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
   before_action :set_track, only: [:show]
 
   def show
+    @se = Settings.open_weather.appid
     @report = Report.new
     @reports = @track.reports.to_json
   end
