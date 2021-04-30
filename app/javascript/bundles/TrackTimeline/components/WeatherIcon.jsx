@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Image } from 'semantic-ui-react';
 import DayClear from '../../../image/weatherIcons/day/day-clear.svg';
 import DayCloudy from '../../../image/weatherIcons/day/day-cloudy.svg';
@@ -54,23 +54,24 @@ const weatherIcons = {
   }
 }
 
-
-// console.log(weatherCode2Type(weatherCode));
+const weatherCode2Type = (weatherCode) => {
+  const [weatherType] =
+    Object.entries(weatherTypes).find(([weatherType, weatherCodeArr]) =>
+      weatherCodeArr.includes(Number(weatherCode))
+    ) || [];
+  return weatherType;
+};
 
 const WeatherIcon = ({weatherCode, dayOrNight}) => {
   const [icon, setIcon] = useState('isClear')
 
+  const theWeatherIcon = useMemo(() => weatherCode2Type(weatherCode),
+    [weatherCode]
+  )
+
   useEffect(() => {
-    const weatherCode2Type = (weatherCode) => {
-      const [weatherType] =
-        Object.entries(weatherTypes).find(([weatherType, weatherCodeArr]) =>
-          weatherCodeArr.includes(Number(weatherCode))
-        ) || [];
-      return weatherType;
-    };
-    const icon = weatherCode2Type(weatherCode);
-    setIcon(icon)
-  }, [weatherCode]);
+    setIcon(theWeatherIcon)
+  }, [theWeatherIcon]);
 
   return (
     <div>
