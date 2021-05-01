@@ -37,6 +37,9 @@ gem 'carrierwave', '~> 2.0'
 # environment settings
 gem 'config'
 
+# 3rd party
+gem 'slack-ruby-client'
+
 # Front-end
 # react with rails
 gem 'react_on_rails', '12.2.0'
