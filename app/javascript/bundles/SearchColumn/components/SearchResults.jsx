@@ -79,6 +79,7 @@ class SearchResults extends Component {
       if (infowindow) {
         infowindow.close();
       }
+      map.data.revertStyle();
       infowindow.setContent("<div style='float:left'>" +
                             "<img src='" + data.getProperty('introductionThumbnail') + "'>" +
                             "</div>" +
@@ -87,8 +88,8 @@ class SearchResults extends Component {
                               "<div style='font-size:medium;'>" + data.getProperty('difficulty') + "</div><br/>" +
                               "<div style='font-size:medium;'>" + data.getProperty('completionTime') + "</div>" +
                             "</div>")
-
-    infowindow.setPosition({ lat: lat, lng: lng });
+      map.data.overrideStyle(data, {strokeColor: 'red', strokeOpacity: '1'});
+      infowindow.setPosition({ lat: lat, lng: lng });
       infowindow.open(map, marker);
     });
     markers.push(marker);
