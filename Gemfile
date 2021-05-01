@@ -40,6 +40,9 @@ gem 'config'
 # 3rd party
 gem 'slack-ruby-client'
 
+# background job
+gem 'sidekiq'
+
 # Front-end
 # react with rails
 gem 'react_on_rails', '12.2.0'

@@ -1,6 +1,12 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   root 'home#index'
   get 'hello_world', to: 'hello_world#index'
+
+  authenticate :user do # 管理員權限
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
   devise_for :users, controllers: {
     omniauth_callbacks: 'users/omniauth_callbacks',

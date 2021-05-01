@@ -1,0 +1,9 @@
+---
+:timeout: 86400
+:pidfile: tmp/pids/sidekiq.pid
+staging:
+  :concurrency: 10
+production:
+  :concurrency: 20
+:queues:
+  - ['robot', 4]
