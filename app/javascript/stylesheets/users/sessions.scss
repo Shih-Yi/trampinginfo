@@ -2,6 +2,7 @@ body.login{
   background: url(../image/bg.jpg) no-repeat center center;
   -webkit-background-size: cover;
   background-size: cover;
+  background-attachment: fixed;
   height: 100vh;
 }
 .login-container{
