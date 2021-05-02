@@ -31,19 +31,23 @@ gem 'devise', github: 'heartcombo/devise', branch: "master"
 gem 'omniauth-facebook'
 gem "omniauth-rails_csrf_protection", '~> 1.0'
 
-# image
-gem 'carrierwave', '~> 2.0'
+# Fog for Google Cloud Platform
+gem 'fog-google'
+# upload images
+gem 'carrierwave', '2.1.1'
+gem "mini_magick"
 
 # environment settings
 gem 'config'
 
-# 3rd party
+## 3rd party
+# send msg to slack
 gem 'slack-ruby-client'
 
 # background job
 gem 'sidekiq'
 
-# Front-end
+## Front-end
 # react with rails
 gem 'react_on_rails', '12.2.0'
 
