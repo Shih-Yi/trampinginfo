@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  rescue_from StandardError, with: :send_errors_to_slack # if production?
+  rescue_from StandardError, with: :send_errors_to_slack if production?
 
   protected
 
