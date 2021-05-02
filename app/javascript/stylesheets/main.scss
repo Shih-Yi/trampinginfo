@@ -4,6 +4,13 @@ body {
   font-family: "Varela Round", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 }
 
+body.home-index{
+  background: url(../image/bg.jpg) no-repeat center center;
+  -webkit-background-size: cover;
+  background-size: cover;
+  height: 100vh;
+}
+
 // fix Semantic UI show scrollbar
 body ::-webkit-scrollbar {
   width: 0px;
@@ -28,7 +35,7 @@ a {
 
 // NAVBARS
 .navbar-default {
-  background-color: $nav-backgraound-color;
+  // background-color: $nav-backgraound-color;
 }
 
 .navbar-default .navbar-brand {
@@ -46,6 +53,8 @@ a {
   display: block;
   white-space: normal;
   width: 100%;
+  font-size: 20px;
+  height: 50px;
 }
 
 .btn {
@@ -95,8 +104,8 @@ a {
 }
 
 .btn.btn-form {
-  border: 1px solid #00A699;
-  background-color: #00A699;
+  border: 1px solid $brand-color;
+  background-color: $brand-color;
 }
 
 .btn.btn-form:active {
