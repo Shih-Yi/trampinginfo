@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Modal, Form, Input } from 'semantic-ui-react'
-import { useForm } from "react-hook-form";
+// import { useForm } from "react-hook-form";
 import axios from 'axios';
 
 
@@ -48,11 +48,11 @@ function ModalDimmer() {
     size: undefined,
     isSendData: false,
   })
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   formState: { errors },
+  // } = useForm();
 
   const onSend = (data) => {
     console.log("onSubmit======")

@@ -74,6 +74,13 @@ a {
   margin-top: 15px;
 }
 
+.btn-sm {
+  color: rgb(86, 90, 92);
+  &:hover {
+    color: white;
+  }
+}
+
 .btn:hover, .btn:focus {
   color: #fff;
 }
@@ -364,6 +371,11 @@ a {
   height: 98%;
 }
 
+.scontainer {
+  height: 100%;
+  margin-bottom: 5rem;
+}
+
 #left {
   
   overflow: scroll;
@@ -378,6 +390,17 @@ a {
   right: 0;
   width: 1000px;
   height: 100%;
+}
+
+.tracks-showpage {
+  margin-bottom: 5rem;
+}
+
+.footer {
+  padding: 0 0 2rem;
+  .content {
+    font-size: 0.8rem;
+  }
 }
 
 .pagination-wrap .pagination{
