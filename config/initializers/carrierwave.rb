@@ -6,5 +6,5 @@ CarrierWave.configure do |config|
     google_project: Settings.google_cloud_storage_project_name,
     google_json_key_string: Settings.google_cloud_storage_credential_content
   }
-  config.fog_directory = 'tracksinfo_bucket'
+  config.fog_directory = 'tracksinfo_bucket_us-west1'
 end
