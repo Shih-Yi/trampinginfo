@@ -79,7 +79,6 @@ a {
 
 .btn.btn-default {
   width: 100%;
-  border-color: #c4c4c4;
   background: white;
   color: #484848;
   border-radius: 2px;
@@ -89,17 +88,15 @@ a {
 
 .btn.btn-normal {
   color: white;
-  border: 1px solid #ff5a5f;
-  background-color: #ff5a5f;
+  background-color: $brand;
   &:hover {
     color: white;
-    background-color: #ff7275; /* Green */
+    background-color: #4fd1b7; /* Green */
   }
 }
 
 .btn.btn-normal:active {
   outline: none;
-  border-color: #e00007;
   background-color: #e00007;
 }
 
@@ -363,9 +360,10 @@ a {
   height: 98%;
 }
 
-.scontainer {
+.main-container {
   height: 100%;
-  margin-bottom: 5rem;
+  margin-bottom: 2rem;
+  overflow: auto;
 }
 
 #left {
