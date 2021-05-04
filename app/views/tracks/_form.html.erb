@@ -28,7 +28,8 @@
           <div class="ui middle aligned center aligned grid container">
             <div class="ui fluid segment">
             <%= f.label :avatar, class: "ui huge green right floated button" do %>
-              <i class="fas fa-upload"></i> Upload Image
+              <i class="fas fa-upload"></i>
+              <span class="upload-text"> Upload Image </span>
              <%- end -%>
             <%= f.file_field :avatar, :class => "form-control inputfile" %>
             </div>
@@ -36,7 +37,7 @@
           </div>
           <div class="modal-footer">
             <div class="form-group">
-              <%= f.submit class: "btn btn-black" %>
+              <%= f.submit class: "btn btn-black btn-normal" %>
             </div>
           </div>
         <% end %>
@@ -44,3 +45,16 @@
     </div>
   </div>
 </div>
+
+<script>
+  let inputs = document.querySelectorAll( '.inputfile' )
+  let imgInput = inputs[0]
+  imgInput.addEventListener( 'change', function(e) {
+    if( this.files && this.files.length > 0 ) {
+      fileName = e.target.value.split( '\\' ).pop();
+      if (fileName) {
+        $('.upload-text').text(fileName)
+      }
+    }
+  })
+</script>
