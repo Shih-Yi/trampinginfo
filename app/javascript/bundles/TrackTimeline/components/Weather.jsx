@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Statistic } from 'semantic-ui-react'
+import { Grid, Statistic, Segment } from 'semantic-ui-react'
 import WeatherIcon from './WeatherIcon'
 import axios from 'axios';
-
-const align = {
-  'marginLeft': 'auto',
-  'marginRight': 'auto',
-  'display': 'block',
-}
 
 const setLocalStorageExpiry = (key, array, ttl) => {
   array.push({'expiry': new Date().getTime() + ttl})
@@ -60,7 +54,7 @@ const Weather = (props) => {
 
   return (
     <div>
-      <Grid verticalAlign='middle' divided='vertically' centered>
+      <Grid verticalAlign='middle' divided='vertically' centered columns='equal'>
         <Grid.Row columns={1}>
           <Grid.Column >
             <Statistic size='mini'>
@@ -70,17 +64,15 @@ const Weather = (props) => {
         </Grid.Row>
 
         <Grid.Row columns={5}>
-          {weatherDailyData.map(item => (
-            <Grid.Column>
-              <Statistic size='mini' style={align}>
-                <Statistic.Label>
-                  {new Intl.DateTimeFormat('en', { dateStyle: 'full'}).format(new Date(item.dt*1000)).substr(0,3)}
-                </Statistic.Label>
-              </Statistic>
+          {weatherDailyData.map((item, index) => (
+            <Grid.Column className={index == 4 ? 'd-none d-md-block' : 'column-padding'}>
+              <Segment basic className="weather_c">
+                {new Intl.DateTimeFormat('en', { dateStyle: 'full'}).format(new Date(item.dt*1000)).substr(0,3)}
+              </Segment>
               <WeatherIcon weatherCode={item.weather[0].id} dayOrNight="day" />
-              <Statistic size='mini' style={align}>
-                <Statistic.Value>{`${Math.round(item.temp.max)}°`} / {`${Math.round(item.temp.min)}°`}</Statistic.Value>
-              </Statistic>
+              <Segment basic className="weather_c">
+                {`${Math.round(item.temp.max)}° / ${Math.round(item.temp.min)}°`}
+              </Segment>
             </Grid.Column>
           ))}
         </Grid.Row>

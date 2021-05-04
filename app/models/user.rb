@@ -61,6 +61,10 @@ class User < ApplicationRecord
 
   # public instance methods ...................................................
 
+  def user_name
+    name || email.split(/\.|@/)[0]
+  end
+
   def bind_omniauth(auth, auth_provider)
     transaction do
       self.name = auth.info.name if name.blank?

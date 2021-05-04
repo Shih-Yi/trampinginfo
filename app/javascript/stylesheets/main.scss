@@ -97,7 +97,7 @@ a {
 
 .btn.btn-normal:active {
   outline: none;
-  background-color: #e00007;
+  background-color: #4fd1b7;
 }
 
 .btn.btn-form {
@@ -458,4 +458,45 @@ a {
   bottom: auto!important;
   left: auto!important;
   height: unset!important;
+}
+
+// timeline
+
+.vertical-timeline {
+  .timeline-data {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .weather_c {
+    font-size: 1.2rem!important;
+    font-weight: 500!important;
+    padding: 0!important;
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .weather_c {
+    font-size: 1.1rem!important;
+    font-weight: 500!important;
+    padding: 0!important;
+    text-align: center;
+  }
+  .column-padding {
+    padding: 0 8px 0!important;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .weather_c {
+    font-size: 0.9rem!important;
+    font-weight: 500!important;
+    padding: 0!important;
+    text-align: center;
+  }
+  .column-padding {
+    padding: 0 4px 0!important;
+  }
 }
