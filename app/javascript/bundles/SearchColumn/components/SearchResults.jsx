@@ -302,12 +302,15 @@ class SearchResults extends Component {
                 <img className="card-img card-img-rounded" data-src="" src={item.properties.introductionThumbnail} data-holder-rendered="true"></img>
               </a>
               <div className="card-body">
-                  <p className="card-text">{item.properties.name}</p>
+                  <p className="card-text item-name">{item.properties.name}</p>
+                  <p className="card-text">{item.properties.completionTime}</p>
                   <div className="d-flex justify-content-between align-items-center">
                     <div className="btn-group">
+                    <a href={`/tracks/${item.properties.id}`}>
                       <button type="button" className="btn btn-sm btn-outline-secondary">View</button>
+                    </a>
                     </div>
-                    <small className="text-muted">9 mins</small>
+                    <small className="text-muted">{item.properties.difficulty}</small>
                   </div>
               </div>
             </div>

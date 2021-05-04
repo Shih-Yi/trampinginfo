@@ -414,6 +414,13 @@ a {
   }
 }
 
+.card-body {
+  .item-name {
+    font-size: 15px;
+    font-weight: 800;
+  }
+}
+
 #searchLoading {
   margin-top: 50px;
   svg {
