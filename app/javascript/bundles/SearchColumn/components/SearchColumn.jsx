@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SearchHeader from './SearchHeader';
 import SearchResults from './SearchResults';
+import '../../../stylesheets/search-page-layout.scss'
 
 const mapStyle = {
   width: '100%',
@@ -41,6 +42,9 @@ class SearchColumn extends Component {
   }
 
   componentDidMount() {
+    // useing react router to replace body component
+    // but wanna change background for whole page
+    $("body").addClass("home-search-page");
     this.initMap();
   }
 
