@@ -1,15 +1,15 @@
 class TracksController < ApplicationController
   # before_action :authenticate_user!
   before_action :set_track, only: [:show]
-  Secret Place
+
   REPORT_TYPE = [
-    %w[Secret\ Place Secret\ Place],
-    %w[Best-loved Best-loved],
-    %w[Must\ Go Must\ Go],
-    %w[Accident Accident],
-    %w[Weather Weather],
-    %w[Road\ Blocked Road\ Blocked],
-    %w[Others Others]
+    %w[Secret\ Place],
+    %w[Best-loved],
+    %w[Must\ Go],
+    %w[Weather],
+    %w[Accident],
+    %w[Road\ Blocked],
+    %w[Others]
   ].freeze
 
   def show

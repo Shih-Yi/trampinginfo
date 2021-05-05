@@ -174,7 +174,10 @@ a {
 
 // FORMS
 .form-group {
+  text-align: center;
   margin-bottom: 25px;
+  display: flex;
+  justify-content: center;
 }
 
 .form-control {
@@ -188,29 +191,23 @@ a {
 }
 
 .form-group textarea {
-  border: 1px solid $brand;
+  float: left;
+  width: 90%;
+   border: none;
+  border-radius: 1rem;
+  background-color: #EDEDED;
 }
 
 .form-group select {
-  width: 100%;
+  width: 90%;
   color: #565a5c;
   background-color: white;
-  border: 1px solid $brand;
-  border-radius: 2px;
+  // border: 1px solid $brand;
+  border-radius: 1rem;
   padding: 10px;
-  appearance: none;
-  -moz-appearance: none; /* Firefox */
-  -webkit-appearance: none; /* Safari & Chrome */
-}
-
-.select:before {
-  content: '\25bc';
-  font-size: 1.2em;
-  position: absolute;
-  color: #00A699;
-  top: 35px;
-  right: 30px;
-  transform: scale(0.94, 0.62);
+  // appearance: none;
+  // -moz-appearance: none; /* Firefox */
+  // -webkit-appearance: none; /* Safari & Chrome */
 }
 
 .form-group input[type="checkbox"] {
@@ -237,18 +234,37 @@ a {
 
 .form-group{
   .segment{
-    border: none;
+    width: 90%;
     box-shadow: none;
+    padding: 0;
+    margin: 0.7rem!important;
+    border: none;
   }
   .form_avatar_button {
-    color: $brand;
+    // color: $brand;
+    width: 100%;
     background-color: #fff;
-    border: 1px solid $brand;
+    border-radius: 1rem;
+    border: 1px solid #8e8e8e;
+    box-shadow: none;
     &:hover {
       color: white;
       background-color: $brand;
+      border: none;
+    }
+    .upload-text{
+      font-size: 1.1rem;
     }
   }
+}
+
+.form-group .form-submit{
+  color: #fff;
+  width: 90%;
+  font-size: 1.1rem;
+  border-radius: 1rem;
+  background: $brand;
+  border: none;
 }
 
 // SIDEBAR
@@ -474,6 +490,20 @@ a {
   }
 }
 
+// bootstrap modal
+.modal {
+  .modal-content {
+    border: none;
+    border-radius: 1rem;
+  }
+  .modal-header {
+    border-bottom: none;
+    .modal-title {
+      margin-left: 2rem;
+    }
+  }
+}
+
 @media only screen and (min-width: 768px) {
   // weather
   .weather_c {
@@ -570,6 +600,20 @@ a {
     }
     .item {
       margin: 0!important;
+    }
+  }
+
+  // bootstrap modal
+  .modal {
+    .modal-content {
+      width: 90%;
+      margin: auto;
+    }
+    .form-group {
+      .container {
+        width: 100%!important;
+        margin: -1rem 0px!important;
+      }
     }
   }
 }
