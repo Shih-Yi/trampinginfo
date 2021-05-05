@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Statistic, Segment } from 'semantic-ui-react'
+import { Grid, Statistic, Segment, Item } from 'semantic-ui-react'
 import WeatherIcon from './WeatherIcon'
 import axios from 'axios';
 
@@ -20,6 +20,18 @@ const isLocalStorageExpiry = (key) => {
       return newArray
   }
 }
+
+const capitalizeSentence = (sentence) => {
+  let wordsArray = sentence.toLowerCase().split(' ')
+  let capsArray = []
+
+  wordsArray.forEach(word => {
+      capsArray.push(word[0].toUpperCase() + word.slice(1))
+  });
+
+  return capsArray.join(' ')
+}
+
 
 const Weather = (props) => {
   const { track, weatherdd } = props
@@ -55,14 +67,6 @@ const Weather = (props) => {
   return (
     <div>
       <Grid verticalAlign='middle' divided='vertically' centered columns='equal'>
-        <Grid.Row columns={1}>
-          <Grid.Column >
-            <Statistic size='mini'>
-              <Statistic.Value>Kōhaihai area short walks</Statistic.Value>
-            </Statistic>
-          </Grid.Column>
-        </Grid.Row>
-
         <Grid.Row columns={5}>
           {weatherDailyData.map((item, index) => (
             <Grid.Column className={index == 4 ? 'd-none d-md-block' : 'column-padding'}>
@@ -77,6 +81,19 @@ const Weather = (props) => {
           ))}
         </Grid.Row>
       </Grid>
+
+      <Item.Group className="track-row">
+        <Item>
+          <Item.Content>
+            <Item.Header className="track-title">{capitalizeSentence(track.name)}</Item.Header>
+            <Item.Meta>{track.completion_time}</Item.Meta>
+            <Item.Description>
+              {track.introduction}
+            </Item.Description>
+            <Item.Extra>{track.difficulty == '[]' ? '' : track.difficulty}</Item.Extra>
+          </Item.Content>
+        </Item>
+      </Item.Group>
     </div>
   )
 }

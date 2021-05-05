@@ -101,24 +101,24 @@ a {
 }
 
 .btn.btn-form {
-  border: 1px solid $brand-color;
+  // border: 1px solid $brand-color;
   background-color: $brand-color;
 }
 
 .btn.btn-form:active {
   outline: none;
-  border-color: #066165;
+  // border-color: #066165;
   background-color: #066165;
 }
 
 .btn.btn-facebook {
-  border: 1px solid #3B5998;
+  // border: 1px solid #3B5998;
   background-color: #3B5998;
 }
 
 .btn.btn-facebook:active {
   outline: none;
-  border-color: #2d467b;
+  // border-color: #2d467b;
   background-color: #2d467b;
 }
 
@@ -184,18 +184,18 @@ a {
 
 .form-group input {
   height: 45px;
-  border: 1px solid #00A699;
+  font-size: 1.5rem;
 }
 
 .form-group textarea {
-  border: 1px solid #00A699;
+  border: 1px solid $brand;
 }
 
 .form-group select {
   width: 100%;
   color: #565a5c;
   background-color: white;
-  border: 1px solid #00A699;
+  border: 1px solid $brand;
   border-radius: 2px;
   padding: 10px;
   appearance: none;
@@ -233,6 +233,22 @@ a {
   text-align: center;
   width: 1.25em;
   color: #00A699;
+}
+
+.form-group{
+  .segment{
+    border: none;
+    box-shadow: none;
+  }
+  .form_avatar_button {
+    color: $brand;
+    background-color: #fff;
+    border: 1px solid $brand;
+    &:hover {
+      color: white;
+      background-color: $brand;
+    }
+  }
 }
 
 // SIDEBAR
@@ -316,20 +332,6 @@ a {
   font-size: 14px;
 }
 
-// RESERVATIONS
-.reservation-table td {
-  width: 100%;
-  border: none;
-  border-bottom: 1px solid #dce0e0;
-  padding: 10px;
-}
-
-.reservation-table .total td {
-  font-size: 16px;
-  font-weight: bold;
-  border: none;
-}
-
 .form-control.datepicker {
   column: #00A699;
   background-color: white;
@@ -367,11 +369,9 @@ a {
 }
 
 #left {
-  
   overflow: scroll;
   height: 100%;
   float: left;
-  
 }
 
 #right {
@@ -466,18 +466,39 @@ a {
   .timeline-data {
     display: none;
   }
+  .item {
+    .label{
+      font-size: 1rem!important;
+      background-color: #fff;
+    }
+  }
 }
 
 @media only screen and (min-width: 768px) {
+  // weather
   .weather_c {
     font-size: 1.2rem!important;
     font-weight: 500!important;
     padding: 0!important;
     text-align: center;
   }
+
+  // weather track title row
+  .track-row {
+    text-align: center;
+    .track-title {
+      font-size: 2rem!important;
+    }
+    .description {
+      font-size: 1.2rem!important;
+      font-weight: 400!important;
+      margin: 0px 70px!important;
+    }
+  }
 }
 
 @media only screen and (max-width: 768px) {
+  // weather
   .weather_c {
     font-size: 1.1rem!important;
     font-weight: 500!important;
@@ -487,9 +508,33 @@ a {
   .column-padding {
     padding: 0 8px 0!important;
   }
+
+  // weather track title row
+  .track-row {
+    text-align: center;
+    .item{
+      margin: 0!important;
+    }
+    .track-title {
+      font-size: 1.6rem!important;
+    }
+    .description {
+      font-size: 1.2rem!important;
+      font-weight: 400!important;
+    }
+  }
+  .vertical-timeline {
+    .items {
+      margin: 1rem!important;
+    }
+    .item {
+      margin: 0!important;
+    }
+  }
 }
 
 @media only screen and (max-width: 480px) {
+  // weather
   .weather_c {
     font-size: 0.9rem!important;
     font-weight: 500!important;
@@ -498,5 +543,33 @@ a {
   }
   .column-padding {
     padding: 0 4px 0!important;
+  }
+  // weather track title row
+  .track-row {
+    text-align: center;
+    .item{
+      margin: 0!important;
+    }
+    .track-title {
+      font-size: 1.3rem!important;
+    }
+    .description {
+      font-size: 1.1rem!important;
+      font-weight: 400!important;
+    }
+  }
+
+  // timeline
+  .vertical-timeline {
+    .items {
+      margin: 1rem!important;
+      .label {
+        padding-left: 0!important;
+        padding-right: 0!important;
+      }
+    }
+    .item {
+      margin: 0!important;
+    }
   }
 }
