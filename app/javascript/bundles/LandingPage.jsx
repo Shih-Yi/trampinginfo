@@ -15,28 +15,32 @@ const LandingPage = (props) => {
   return(
     <div className="container">
       <div className="row">
-        <div className="col-md-7 banner">
-          <h1><span className="text-red">TracksInfo</span> </h1>
+        <div className="col-md-12 landing-title">
+          <div className="title-text">Latest updates of all tracks in New Zealand</div>
+          <div className="content-text">
+            Heading for a hike and afraid it might rain? Read form those have just been there
+          </div>
         </div>
       </div>
       <div className="row">
+        <div className="col-md-3">
+        </div>
         <div className="col-md-6">
-          <input type="text" name="search" id="autolocation" placeholder="What are you looking for?" className="form-control" value={searchInput} onChange={setInput} />
+          <div class="input-group">
+            <input type="text" name="search" id="autolocation" placeholder="What are you looking for?" className="form-control input-btn" value={searchInput} onChange={setInput} />
+            <Link to={{ pathname: "/search", search: `searchInput=${searchInput}` }} className="text-link">
+              <span class="input-group-append">
+                <button class="bg-white search-input-btn" type="button">
+                  <i class="fa fa-search"></i>
+                </button>
+              </span>
+            </Link>
+          </div>
+        </div>
+        <div className="col-md-3">
         </div>
       </div>
       <br/><br/>
-      <div className="row">
-        <div className="col-md-4 col-md-offset-4">
-          <Link to={{ pathname: "/search", search: `searchInput=${searchInput}` }} className="text-link">
-            <Button className='btn btn-normal btn-block'>
-              Search
-            </Button>
-          </Link>
-        </div>
-      </div>
-      <br /><hr /><br />
-      <div><h3>Tracks</h3></div>
-      <br />
       <div className="row">
       </div>
     </div>

@@ -1,7 +1,25 @@
+$brand-nav-color: #2bb59b;
+
 body.home-search-page{
-  background: white;
+  background: #F8F8F8;
   -webkit-background-size: cover;
   background-size: cover;
   background-attachment: fixed;
   height: 100vh;
+  .navbar-bg-color {
+    background: #fff;
+  }
+  .navbar {
+    .navbar-brand {
+      color: $brand-nav-color;
+    }
+    .nav {
+      .nav-link {
+        color: $brand-nav-color;
+      }
+    }
+    .animated-icon1 span {
+      background: $brand-nav-color;
+    }
+  }
 }
