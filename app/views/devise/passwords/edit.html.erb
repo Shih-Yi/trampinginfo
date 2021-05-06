@@ -6,7 +6,7 @@
       </div>
       <div class="login-content">
         <div class="login-header">
-          <h3><strong>Change your password</strong></h3>
+          <h5><strong>Change your password</strong></h5>
         </div>
         <div class="login-body">
           <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
@@ -27,15 +27,16 @@
             </div>
 
             <div class="form-group">
-              <button type="submit" class="btn btn-primary form-control"><strong>Reset Password</strong></button>
+              <button type="submit" class="form-btn form-btn-login"><strong>Reset Password</strong></button>
             </div>
 
           <% end %>
-        </div> <!-- end  login-body -->
+        </div>
+        <div class="login-footer text-center template">
+          <%= render "devise/shared/links" %>
+        </div>
+        <!-- end  login-body -->
       </div><!-- end  login-content -->
-      <div class="login-footer text-center template">
-        <%= render "devise/shared/links" %>
-      </div>
     </div>  <!-- end  login-container -->
   </div>
 </div><!-- end container -->

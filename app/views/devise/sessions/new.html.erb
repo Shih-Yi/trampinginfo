@@ -1,12 +1,12 @@
 <div class="container ">
   <div class="row">
-    <div class="login-container col-lg-4 col-md-6 col-sm-8 col-xs-12">
+    <div class="login-container col-xl-4 col-lg-5 col-md-6 col-sm-8 col-xs-12">
       <div class="login-title text-center">
         <h2><span><%= link_to 'TracksInfo', root_path %></span></h2>
       </div>
       <div class="login-content">
         <div class="login-header ">
-          <h3><strong>Login</strong></h3>
+          <h4><strong>Login</strong></h4>
         </div>
         <div class="login-body">
           <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -30,14 +30,17 @@
               <% end %>
             </div>
             <div class="form-group">
-              <button type="submit" class="btn btn-form form-control"><strong>Login</strong></button>
+              <button type="submit" class="form-btn form-btn-login">
+                <span>Login</span>
+              </button>
             </div>
           <% end %>
-          <%= link_to "Facebook", user_facebook_omniauth_authorize_path, method: :post, class: "btn btn-facebook btn-block" %>
-        </div> <!-- end  login-body -->
+          <%= link_to "Continue with Facebook", user_facebook_omniauth_authorize_path, method: :post, class: "btn btn-facebook" %>
+        </div>
         <div class="login-footer text-center template">
           <%= render "devise/shared/links" %>
         </div>
+        <!-- end  login-body -->
       </div><!-- end  login-content -->
     </div>  <!-- end  login-container -->
   </div>

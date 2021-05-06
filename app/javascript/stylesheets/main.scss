@@ -112,8 +112,13 @@ a {
 }
 
 .btn.btn-facebook {
-  // border: 1px solid #3B5998;
+  width: 100%;
+  height: 40px;
   background-color: #3B5998;
+  font-size: 1.1rem;
+  border-radius: 1rem;
+  border: none;
+  font-weight: 600;
 }
 
 .btn.btn-facebook:active {
@@ -174,6 +179,10 @@ a {
 
 // FORMS
 .form-group {
+  margin-bottom: 25px;
+}
+
+.report-form-group {
   text-align: center;
   margin-bottom: 25px;
   display: flex;
@@ -258,13 +267,15 @@ a {
   }
 }
 
-.form-group .form-submit{
+.form-group .form-btn{
   color: #fff;
   width: 90%;
+  height: 40px;
   font-size: 1.1rem;
   border-radius: 1rem;
   background: $brand;
   border: none;
+  font-weight: 600;
 }
 
 // SIDEBAR

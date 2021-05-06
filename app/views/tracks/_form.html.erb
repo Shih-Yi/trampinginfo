@@ -10,19 +10,19 @@
       </div>
       <div class="modal-body">
         <%= form_for @report, url: track_reports_path(@track), html: { method: :post } do |f| %>
-          <div class="form-group">
+          <div class="form-group report-form-group">
             <%= f.select :report_type, @report_types, { include_blank: 'What happened?' }, { required: true } %>
           </div>
           <% if false %>
-            <div class="form-group">
+            <div class="form-group report-form-group">
               <%= f.label :location %>
               <%= f.text_field :location, :class => "form-control" %>
             </div>
           <% end %>
-          <div class="form-group">
+          <div class="form-group report-form-group">
             <%= f.text_area :description, :class => "form-control", rows: 5, placeholder: "e.g. the weather is so nice! come and join us!" %>
           </div>
-          <div class="form-group">
+          <div class="form-group report-form-group">
             <div class="ui middle aligned center aligned grid container">
               <div class="ui fluid segment">
               <%= f.label :avatar, class: "ui button form_avatar_button" do %>
@@ -33,8 +33,8 @@
               </div>
             </div>
           </div>
-          <div class="form-group">
-            <%= f.submit "Post", class: "form-control form-submit" %>
+          <div class="form-group report-form-group">
+            <%= f.submit "Post", class: "form-control form-btn" %>
           </div>
         <% end %>
       </div>
