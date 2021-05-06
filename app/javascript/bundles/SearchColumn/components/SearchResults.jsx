@@ -4,7 +4,7 @@ import gsap from "gsap";
 import MarkerClusterer from '@googlemaps/markerclustererplus';
 import { Search, Grid } from 'semantic-ui-react'
 
-let perPage = 10;
+let perPage = 12;
 let mapFeatures, mapFeaturesWithId, markersObjWithId;
 let infowindow, markerClusterer;
 let allTracks = [];
@@ -294,24 +294,18 @@ class SearchResults extends Component {
             </Grid.Column>
           </Grid>
 
-          <Grid relaxed doubling container columns={2}>
+          <Grid doubling container stackable columns={3}>
           {pageItems.map(item => (
             <Grid.Column>
-            <div key={item.properties.OBJECTID} className="card mb-4 shadow-sm rounded-box result-item" data-key={item.properties.OBJECTID} onMouseOver={this.cardShowTrackEvent} onMouseOut={this.cardDisableTrackEvent}>
+            <div key={item.properties.OBJECTID} className="card rounded-box result-item" data-key={item.properties.OBJECTID} onMouseOver={this.cardShowTrackEvent} onMouseOut={this.cardDisableTrackEvent}>
               <a href={`/tracks/${item.properties.id}`} className={`track-img-${item.properties.OBJECTID}`} >
                 <img className="card-img card-img-rounded" data-src="" src={item.properties.introductionThumbnail} data-holder-rendered="true"></img>
               </a>
               <div className="card-body">
-                  <p className="card-text item-name">{item.properties.name}</p>
-                  <p className="card-text">{item.properties.completionTime}</p>
-                  <div className="d-flex justify-content-between align-items-center">
-                    <div className="btn-group">
-                    <a href={`/tracks/${item.properties.id}`}>
-                      <button type="button" className="btn btn-sm btn-outline-secondary">View</button>
-                    </a>
-                    </div>
-                    <small className="text-muted">{item.properties.difficulty}</small>
-                  </div>
+                  <p className="card-text item-name track-cd-text">{item.properties.name}</p>
+                  <p className="card-text track-cd-text empty-with-space">{item.properties.difficulty}</p>
+                  <p className="card-text track-cd-text empty-with-space">{item.properties.completionTime}</p>
+
               </div>
             </div>
             </Grid.Column>

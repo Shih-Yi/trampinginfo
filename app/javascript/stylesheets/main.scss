@@ -66,13 +66,6 @@ a {
   margin-top: 15px;
 }
 
-.btn-sm {
-  color: rgb(86, 90, 92);
-  &:hover {
-    color: white;
-  }
-}
-
 .btn:hover, .btn:focus {
   color: #fff;
 }
@@ -443,14 +436,26 @@ a {
     border-radius: 0.9rem;
   }
   .card-img-rounded{
-    border-radius: 0.9rem 0.9rem 0rem 0rem;
+    border-radius: 0.6rem 0.6rem 0rem 0rem;
   }
 }
 
 .card-body {
+  padding: 1rem;
   .item-name {
     font-size: 15px;
     font-weight: 800;
+  }
+  .track-cd-text {
+    margin: 2px;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+  }
+  .empty-with-space {
+    display: inline-block;
+    width: 100%;
+    margin: 0;
   }
 }
 
@@ -550,6 +555,13 @@ a {
       font-size: 1.2rem!important;
       font-weight: 400!important;
       margin: 0px 70px!important;
+    }
+  }
+
+  // serch result
+  .search-column {
+    .column {
+      padding: 16px 10px!important;
     }
   }
 }
@@ -659,6 +671,13 @@ a {
         width: 100%!important;
         margin: -1rem 0px!important;
       }
+    }
+  }
+
+  // serch result
+  .search-column {
+    .column {
+      padding: 12px 8px!important;
     }
   }
 }

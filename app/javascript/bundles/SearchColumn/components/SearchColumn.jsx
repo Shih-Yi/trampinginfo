@@ -54,13 +54,13 @@ class SearchColumn extends Component {
     return (
       <div className="container-fluid content-float" style={rowStyle}>
         <div className="row content-float" >
-          <div className="col-6 col-lg-6 col-md-6 col-sm-12 col-12 mt-4 mb-4" id="left">
+          <div className="col-7 col-lg-7 col-md-7 col-sm-12 col-12 mt-4 mb-4" id="left">
             <div className="search-column">
               <SearchHeader isLoading={isLoading} searchResultsNumber={searchResultsNumber} />
               <SearchResults map={map} searchInput={location ? location.search : null} setIsLoading={this.setIsLoading} updatSearchResultsNumber={this.updatSearchResultsNumber} />
             </div>
           </div>
-          <div className="col-6 col-lg-6 col-md-6 hidden-xs pr-0 px-0">
+          <div className="col-5 col-lg-5 col-md-5 hidden-xs pr-0 px-0">
             <div id="info-map" style={mapStyle}>
             </div>
           </div>
