@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'semantic-ui-react'
-import '../stylesheets/landing-page-layout.scss'
+import '../stylesheets/landing-page/layout.scss'
 
 const LandingPage = (props) => {
   // useing react router to replace body component

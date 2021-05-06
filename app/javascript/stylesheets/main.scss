@@ -337,46 +337,7 @@ a {
     padding-top: 10px;
 }
 
-// LandingPage
-.container{
-  .text-link {
-    text-decoration: none;
-  }
-  .landing-title {
-    color: #fff;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    text-align: center;
-  }
-  .title-text {
-    font-size: 3rem;
-    font-weight: 500;
-  }
-  .content-text {
-    font-size: 1.5rem;
-  }
-}
 
-.input-btn {
-  color: $brand;
-  width: 100%;
-  height: 50px;
-  font-size: 1.1rem;
-  border-radius: 2rem;
-  background: #fff;
-  border: none;
-  font-weight: 600;
-  padding-left: 2rem;
-}
-.input-group {
-  .search-input-btn {
-    height: 50px;
-    border-radius: 0 2rem 2rem 0;
-    border: 0 ;
-    font-weight: bold;
-    padding: 9px 27px;
-  }
-}
 
 // SEARCH
 #main {
@@ -522,21 +483,6 @@ a {
 }
 
 @media only screen and (min-width: 768px) {
-  // Landing Page
-  .container{
-    .landing-title {
-      margin-top: 10rem;
-      margin-bottom: 5rem;
-    }
-    .title-text {
-      font-size: 2.8rem;
-      font-weight: 500;
-    }
-    .content-text {
-      font-size: 2rem;
-    }
-  }
-
   // weather
   .weather_c {
     font-size: 1.2rem!important;
@@ -603,24 +549,6 @@ a {
 }
 
 @media only screen and (max-width: 480px) {
-  // Landing Page
-  .container{
-    .landing-title {
-      margin-top: 4rem;
-      margin-bottom: 2rem;
-    }
-    .title-text {
-      font-size: 2.3rem;
-      font-weight: 500;
-    }
-    .content-text {
-      font-size: 1.5rem;
-    }
-  }
-  .input-btn {
-    font-size: 0.8rem;
-    padding-left: 12px;
-  }
   // weather
   .weather_c {
     font-size: 0.9rem!important;

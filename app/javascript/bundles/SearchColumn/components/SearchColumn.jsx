@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SearchHeader from './SearchHeader';
 import SearchResults from './SearchResults';
-import '../../../stylesheets/search-page-layout.scss'
+import '../../../stylesheets/search-page/layout.scss'
 
 const mapStyle = {
   width: '100%',

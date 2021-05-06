@@ -1,4 +1,4 @@
-$brand-nav-color: #2bb59b;
+@import "../tools/vars";
 
 body.home-search-page{
   background: #F8F8F8;
@@ -11,15 +11,15 @@ body.home-search-page{
   }
   .navbar {
     .navbar-brand {
-      color: $brand-nav-color;
+      color: $brand;
     }
     .nav {
       .nav-link {
-        color: $brand-nav-color;
+        color: $brand;
       }
     }
     .animated-icon1 span {
-      background: $brand-nav-color;
+      background: $brand;
     }
   }
 }
