@@ -9,6 +9,7 @@ const App = () =>{
       <Switch>
         <Route exact path="/" component={LandingPage}/>
         <Route path="/search" component={SearchColumn}/>
+        <Route path="/" component={LandingPage}/>
       </Switch>
     </HashRouter>
   );
