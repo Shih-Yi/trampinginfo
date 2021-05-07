@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
 import { Image, Item, Label } from 'semantic-ui-react'
+import blankProfile from '../../../image/blank-profile.png'
 
 class TrackTimeline extends Component {
   constructor(props) {
@@ -29,7 +30,7 @@ class TrackTimeline extends Component {
               <Item>
                 <Item.Content>
                 <Label image>
-                  <img src={report.user.avatar.url} />
+                  <img src={report.user.avatar.url ? report.user.avatar.url : blankProfile } className="report-avatar" />
                   {report.user.user_name}
                 </Label>
                   <Item.Meta>{report.report_type}</Item.Meta>
