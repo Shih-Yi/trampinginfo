@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PopularTracks from './PopularTracks'
 import { Link } from 'react-router-dom';
 import '../../../stylesheets/landing-page/layout.scss'
+import { Link, useHistory } from 'react-router-dom';
 
 const LandingPage = (props) => {
   // useing react router to replace body component
@@ -10,6 +11,12 @@ const LandingPage = (props) => {
   const [ searchInput, setSearchInput ] = useState('')
   const setInput = (e) => {
     setSearchInput(e.target.value)
+  }
+  let history = useHistory();
+  const onKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      history.push(`/search?searchInput=${searchInput}`);
+    }
   }
 
   return(
@@ -29,8 +36,8 @@ const LandingPage = (props) => {
             </div>
             <div className="col-md-6">
               <div className="input-group">
-                <input type="text" name="search" id="autolocation" placeholder="What are you looking for?" className="form-control input-btn" value={searchInput} onChange={setInput} />
-                <Link to={{ pathname: "/search", search: `searchInput=${searchInput}` }} className="text-link">
+                <input type="text" name="search" id="autolocation" placeholder="What are you looking for?" className="form-control input-btn" value={searchInput} onChange={setInput} onKeyPress={onKeyPress}/>
+                <Link to={{ pathname: "/search", search: `searchInput=${searchInput}` }} className="text-link" >
                   <span className="input-group-append">
                     <button className="bg-white search-input-btn" type="button">
                       <i className="fa fa-search"></i>
