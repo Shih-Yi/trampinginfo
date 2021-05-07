@@ -19,7 +19,8 @@ Rails.application.routes.draw do
     get '/users/password', to: "users/passwords#new"
   end
 
-  get 'search', to: 'home#search'
+  get 'search',          to: 'home#search'
+  get 'privacy',         to: 'home#privacy'
 
   resources :tracks do
     resources :reports do

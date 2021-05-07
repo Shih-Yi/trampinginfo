@@ -4,4 +4,7 @@ class HomeController < ApplicationController
 
   def search
   end
+
+  def privacy
+  end
 end
