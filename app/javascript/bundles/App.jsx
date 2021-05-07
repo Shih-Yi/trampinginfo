@@ -1,6 +1,6 @@
 import React from 'react';
 import { HashRouter,Route,Switch } from "react-router-dom";
-import LandingPage from "../bundles/LandingPage"
+import LandingPage from "../bundles/LandingPage/components/LandingPage"
 import SearchColumn from "../bundles/SearchColumn/components/SearchColumn"
 
 const App = () =>{
