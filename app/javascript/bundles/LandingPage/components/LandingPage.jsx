@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PopularTracks from './PopularTracks'
-import { Link } from 'react-router-dom';
 import '../../../stylesheets/landing-page/layout.scss'
 import { Link, useHistory } from 'react-router-dom';
 
