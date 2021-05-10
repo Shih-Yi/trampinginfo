@@ -244,6 +244,8 @@ GEM
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
     jwt (2.2.2)
+    libv8 (3.16.14.19)
+    libv8 (3.16.14.19-x86_64-darwin-18)
     libv8-node (15.14.0.0)
     libv8-node (15.14.0.0-x86_64-darwin-18)
     listen (3.5.1)
@@ -474,6 +476,7 @@ DEPENDENCIES
   devise!
   fog-google
   jbuilder (~> 2.7)
+  libv8 (~> 3.16.14.9)
   listen (~> 3.3)
   mini_magick
   mini_racer

@@ -36,6 +36,7 @@ gem 'fog-google'
 # upload images
 gem 'carrierwave', '2.1.1'
 gem "mini_magick"
+gem 'libv8', '~> 3.16.14.9'
 
 # environment settings
 gem 'config'
