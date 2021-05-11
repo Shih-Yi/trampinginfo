@@ -71,6 +71,9 @@ group :development do
   gem 'spring'
   # A Ruby static code analyzer and formatter
   gem 'rubocop', require: false
+  gem 'capistrano-rails'
+  gem 'capistrano-passenger'
+  gem 'capistrano-rbenv'
 end
 
 group :test do
