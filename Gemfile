@@ -21,7 +21,6 @@ gem 'jbuilder', '~> 2.7'
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
@@ -31,12 +30,13 @@ gem 'devise', github: 'heartcombo/devise', branch: "master"
 gem 'omniauth-facebook'
 gem "omniauth-rails_csrf_protection", '~> 1.0'
 
+gem 'libv8', '~> 3.16.14.9'
+
 # Fog for Google Cloud Platform
 gem 'fog-google'
 # upload images
 gem 'carrierwave', '2.1.1'
 gem "mini_magick"
-gem 'libv8', '~> 3.16.14.9'
 
 # environment settings
 gem 'config'
