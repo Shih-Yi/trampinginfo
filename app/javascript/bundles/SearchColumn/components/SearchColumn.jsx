@@ -59,7 +59,7 @@ class SearchColumn extends Component {
               <SearchResults map={map} searchInput={location ? location.search : null} setIsLoading={this.setIsLoading} updatSearchResultsNumber={this.updatSearchResultsNumber} />
             </div>
           </div>
-          <div className="col-5 col-lg-5 col-md-5 hidden-xs pr-0 px-0">
+          <div className="col-5 col-lg-5 col-md-5 hidden-xs pr-0 px-0 mt-3">
             <div id="info-map" style={mapStyle}>
             </div>
           </div>
