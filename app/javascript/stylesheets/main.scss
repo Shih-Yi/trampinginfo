@@ -385,7 +385,10 @@ a {
   flex-wrap: wrap;
 }
 
-.search-column{
+.search-column {
+  .search-header-box {
+    padding: 0 1.45rem;
+  }
   .search-header {
     .card-text {
       font-size: large;
