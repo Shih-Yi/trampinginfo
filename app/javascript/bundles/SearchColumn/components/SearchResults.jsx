@@ -169,9 +169,10 @@ class SearchResults extends Component {
     markers = []
     markerClusterer.clearMarkers();
     let inpuText = e ? e.target.value : searchInput.split('=').pop()
-    if (!e) { $('#searchInput').val(inpuText) }
+    let decode_input = decodeURI(inpuText)
+    if (!e) { $('#searchInput').val(decode_input) }
     let filteredTracks = allTracks.filter(track => {
-      return track.properties.name.toLowerCase().indexOf(inpuText.toLowerCase()) !== -1;
+      return track.properties.name.toLowerCase().indexOf(decode_input.toLowerCase()) !== -1;
     });
     let page = filteredTracks.length == 0 ?  0 : Math.ceil(filteredTracks.length/perPage)
 
