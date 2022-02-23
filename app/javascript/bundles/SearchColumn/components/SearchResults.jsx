@@ -289,11 +289,13 @@ class SearchResults extends Component {
     if (isLoading)
       return(
         <div>
-          <Grid>
-            <Grid.Column>
-              <Search id="searchInput" showNoResults={false} onSearchChange={this.inputOnChange} />
-            </Grid.Column>
-          </Grid>
+          <div className='search-header-box'>
+            <Grid>
+              <Grid.Column>
+                <Search id="searchInput" showNoResults={false} onSearchChange={this.inputOnChange} />
+              </Grid.Column>
+            </Grid>
+          </div>
 
           <Grid doubling container stackable columns={3}>
           {pageItems.map(item => (
