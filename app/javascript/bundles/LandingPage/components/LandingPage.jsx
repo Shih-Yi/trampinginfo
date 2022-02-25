@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import PopularTracks from './PopularTracks'
+import HearFrom from './HearFrom'
+import ExploreWith from './ExploreWith'
 import { Link, useHistory } from 'react-router-dom';
 
 const LandingPage = (props) => {
@@ -53,6 +55,8 @@ const LandingPage = (props) => {
         </div>
       </section>
       <PopularTracks tracks={tracks} />
+      <ExploreWith />
+      <HearFrom />
     </div>
   );
 };
