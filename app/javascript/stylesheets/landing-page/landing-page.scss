@@ -1,0 +1,60 @@
+.landing-page {
+  background: #fff;
+}
+
+// popular tracks
+#popular-tracks {
+  height: 720px;
+  background: #fff;
+  position: relative;
+  margin-bottom: 50px;
+
+  .title {
+    margin-left: 15px;
+  }
+  .card-body {
+    height: 160px;
+  }
+}
+
+// explore-with
+#explore-with {
+  height: 360px;
+  background: #fff;
+  position: relative;
+
+  .jumbotron {
+    height: 320px;
+    background: url(../image/best-track.png) no-repeat center center;
+    line-height: 200px;
+    text-align: center;
+    .title {
+      display: inline-block;
+      color: white;
+      font-weight: 500;
+    }
+  }
+}
+
+// hear from
+#hear-from {
+  height: 580px;
+  background: #fff;
+  position: relative;
+
+  .title {
+    margin-left: 15px;
+  }
+  .img-name {
+    margin: 5px 0 -5px -15px;
+    font-size: 24px;
+  }
+  .img-city {
+    margin: 0 -15px;
+    font-size: 20px;
+  }
+  .img-text {
+    margin: 10px 0 0 0;
+    font-size: 22px;
+  }
+}
