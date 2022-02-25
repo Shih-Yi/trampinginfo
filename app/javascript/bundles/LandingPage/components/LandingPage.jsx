@@ -5,7 +5,7 @@ import { Link, useHistory } from 'react-router-dom';
 const LandingPage = (props) => {
   // useing react router to replace body component
   // but wanna change background for whole page(including navbar)
-  
+  const { tracks } = props
   const [ searchInput, setSearchInput ] = useState('')
   const setInput = (e) => {
     setSearchInput(e.target.value)
@@ -18,7 +18,7 @@ const LandingPage = (props) => {
   }
 
   return(
-    <>
+    <div class="landing-page">
       <section id="cover">
         <div className="container">
           <div className="row">
@@ -52,8 +52,8 @@ const LandingPage = (props) => {
           </div>
         </div>
       </section>
-      <PopularTracks />
-    </>
+      <PopularTracks tracks={tracks} />
+    </div>
   );
 };
 
