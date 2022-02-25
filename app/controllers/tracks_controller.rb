@@ -22,6 +22,6 @@ class TracksController < ApplicationController
   private
 
   def set_track
-    @track = Track.find(params[:id])
+    @track = Track.find_by_object_key(params[:id])
   end
 end
