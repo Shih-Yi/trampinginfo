@@ -69,8 +69,8 @@ class SearchResults extends Component {
     let { map } = this.props
     let marker = null
     let data = mapFeatures[i];
-    let lat = data.getGeometry().getAt(0).g[0].lat();
-    let lng = data.getGeometry().getAt(0).g[0].lng();
+    let lat = data.getGeometry().getAt(0).h[0].lat();
+    let lng = data.getGeometry().getAt(0).h[0].lng();
     marker = new google.maps.Marker({
       position: { lat: lat, lng: lng }, labelClass: "" + data.getProperty('OBJECTID') + "",
     });
