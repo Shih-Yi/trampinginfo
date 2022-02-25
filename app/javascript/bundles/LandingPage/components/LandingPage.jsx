@@ -20,7 +20,7 @@ const LandingPage = (props) => {
   }
 
   return(
-    <div class="landing-page">
+    <div className="landing-page">
       <section id="cover">
         <div className="container">
           <div className="row">

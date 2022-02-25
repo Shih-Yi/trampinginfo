@@ -6,8 +6,8 @@ const ExploreWith = () => {
   return(
     <section id="explore-with">
       <div className="container">
-        <div class="jumbotron">
-          <h1 class='title'>New Zealand has the best tracks, let us explore them together</h1>
+        <div className="jumbotron">
+          <h1 className='title'>New Zealand has the best tracks, let us explore them together</h1>
         </div>
       </div>
     </section>

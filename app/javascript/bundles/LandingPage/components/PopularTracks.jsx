@@ -17,14 +17,14 @@ const PopularTracks = (props) => {
         </div>
         <div className="row">
           {tracks.map(track => (
-            <div class="col-md-4">
-              <div class="card mb-4 shadow-sm">
+            <div className="col-md-4">
+              <div className="card mb-4 shadow-sm">
                 <Image src={Pic} wrapped />
-                <div class="card-body">
+                <div className="card-body">
                   <h4>{track.name}</h4>
-                  <p class="card-text">{track.introduction}</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <small class="text-muted">9 mins</small>
+                  <p className="card-text">{track.introduction}</p>
+                  <div className="d-flex justify-content-between align-items-center">
+                    <small className="text-muted">9 mins</small>
                   </div>
                 </div>
               </div>
