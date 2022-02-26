@@ -303,7 +303,7 @@ class SearchResults extends Component {
           {pageItems.map(item => (
             <Grid.Column>
             <div key={item.properties.OBJECTID} className="card rounded-box result-item" data-key={item.properties.OBJECTID} onMouseOver={this.cardShowTrackEvent} onMouseOut={this.cardDisableTrackEvent}>
-              <a href={`/tracks/${item.properties.id}`} className={`track-img-${item.properties.OBJECTID}`} >
+              <a href={`/tracks/${item.properties.OBJECTID}`} className={`track-img-${item.properties.OBJECTID}`} >
                 <img className="card-img card-img-rounded" data-src="" src={item.properties.introductionThumbnail} data-holder-rendered="true"></img>
               </a>
               <div className="card-body">
