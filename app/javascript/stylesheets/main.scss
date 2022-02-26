@@ -1,7 +1,7 @@
 body {
   color: #565a5c;
   background-color: $body-backgraound-color;
-  font-family: "Varela Round", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font-family: "HelveticaNeue", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   margin-top: 3.5rem;
 }
 
@@ -16,7 +16,12 @@ a {
 }
 
 .container {
-  width: 80%;
+  // width: 80%;
+}
+
+.container-new {
+  width: 85%;
+  margin: auto;
 }
 
 .text-babu, .icon-babu {
@@ -34,8 +39,15 @@ a {
 
 .navbar-default .navbar-brand {
   color: $brand;
-  font-size: 2em;
-  font-weight: 400;
+  width: 177px;
+  font-family: HelveticaNeue;
+  font-size: 36px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.31px;
+  text-align: right;
 }
 
 .navbar-top {

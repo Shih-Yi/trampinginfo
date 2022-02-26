@@ -5,9 +5,9 @@ const ExploreWith = () => {
 
   return(
     <section id="explore-with">
-      <div className="container">
+      <div className="container-new row-box">
         <div className="jumbotron">
-          <h1 className='title'>New Zealand has the best tracks, let us explore them together</h1>
+          <h1 className='title'>New Zealand has the best tracks, let's explore them together</h1>
         </div>
       </div>
     </section>

@@ -20,13 +20,13 @@ body.home-index{
 }
 
 #cover {
-  height: 720px;
+  height: 640px;
   background: url(../image/tracksinfo.jpg) no-repeat center center;
   -webkit-background-size: cover;
   background-size: cover;
 }
 
-.container{
+.container, .container-new{
   .text-link {
     text-decoration: none;
   }
@@ -35,10 +35,19 @@ body.home-index{
     margin-top: 50px;
     margin-bottom: 50px;
     text-align: center;
+    margin-top: 250px;
   }
   .title-text {
-    font-size: 3rem;
-    font-weight: 500;
+    width: 1094px;
+    height: 65px;
+    font-family: HelveticaNeue;
+    font-size: 54px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: -0.47px;
+    text-align: center;
   }
   .content-text {
     font-size: 1.5rem;
@@ -70,12 +79,12 @@ body.home-index{
   // Landing Page
   .container{
     .landing-title {
-      margin-top: 10rem;
+      // margin-top: 10rem;
       margin-bottom: 5rem;
     }
     .title-text {
-      font-size: 2.8rem;
-      font-weight: 500;
+      // font-size: 2.8rem;
+      // font-weight: 500;
     }
     .content-text {
       font-size: 2rem;
@@ -85,17 +94,20 @@ body.home-index{
 
 @media only screen and (max-width: 480px) {
   // Landing Page
-  .container{
+  .container, .container-new{
     .landing-title {
-      margin-top: 4rem;
+      margin-top: 15rem;
       margin-bottom: 2rem;
     }
     .title-text {
+      width: 100%;
       font-size: 2.3rem;
-      font-weight: 500;
+      font-weight: 600;
+      margin: 10px 0 35px 0;
     }
     .content-text {
-      font-size: 1.5rem;
+      font-size: 1.3rem;
+      line-height: 24px;
     }
   }
   .input-btn {

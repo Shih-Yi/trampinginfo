@@ -7,17 +7,17 @@ const PopularTracks = (props) => {
 
   return(
     <section id="popular-tracks">
-      <div className="container">
+      <div className="container-new">
         <div className="row">
-          <div className="my-4 py-4 title">
-            <h1 className="">Hear form what others say</h1>
-            <h4 className="">What you have shared might help somebody else toda!</h4>
+          <div className="my-2 py-4 title">
+            <div className="popular-title">Popular Trails</div>
+            <div className="popular-sub-title">What not join them now?</div>
           </div>
           <div className="bg-light box-shadow mx-auto"></div>
         </div>
         <div className="row">
           {tracks.map(track => (
-            <div className="col-md-4">
+            <div className="col-md-4 card-box">
               <div className="card mb-4 shadow-sm">
                 <Image src={Pic} wrapped />
                 <div className="card-body">
