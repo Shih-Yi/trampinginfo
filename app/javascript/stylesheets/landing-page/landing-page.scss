@@ -69,7 +69,7 @@
   height: 580px;
   background: #fff;
   position: relative;
-
+  
   .row-box {
     padding: 0 25px
   }
@@ -104,6 +104,78 @@
     margin: 10px 0 0 0;
     font-size: 18px;
   }
+}
+
+@media only screen and (min-width: 768px)  and (max-width: 1024px) {
+  #popular-tracks, #explore-with, #hear-from {
+    height: 100%;
+    .container-new {
+      .title {
+        .popular-title {
+          font-size: 2.8rem;
+        }
+        .popular-sub-title {
+          font-size: 1.4rem;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 480px) and (max-width: 768px) {
+
+  #popular-tracks, #explore-with, #hear-from {
+    height: 100%;
+    .container-new {
+      .title {
+        margin: 18px;
+
+        .popular-title {
+          font-size: 2.8rem;
+        }
+        .popular-sub-title {
+          font-size: 1.4rem;
+        }
+      }
+    }
+  }
+  #popular-tracks .container-new {
+    .card-box {
+      padding: 0 20px;
+    }
+  }
+  #explore-with {
+    .row-box {
+      padding: 0;
+    }
+    .jumbotron {
+      .title {
+        color: white;
+        font-size: 2.6rem;
+        font-weight: 700;
+      }
+    }
+  }
+  #hear-from {
+    .container, .container-new{
+      .row-box{
+        padding: 0;
+      }
+      .col-box{
+        margin: 0 0 40px;
+      }
+      .popular-title {
+        margin: 0 0 10px;
+      }
+      .popular-sub-title {
+        margin: 0 0 20px 0;
+      }
+      .img-name, .img-city {
+        margin: 0px;
+      }
+    }
+  }
+
 }
 
 @media only screen and (max-width: 480px) {

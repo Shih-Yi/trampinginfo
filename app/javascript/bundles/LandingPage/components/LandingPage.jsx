@@ -32,9 +32,9 @@ const LandingPage = (props) => {
             </div>
           </div>
           <div className="row">
-            <div className="col-md-3">
+            <div className="col-2 col-sm-3">
             </div>
-            <div className="col-md-6">
+            <div className="col-8 col-sm-6">
               <div className="input-group">
                 <input type="text" name="search" id="autolocation" placeholder="What are you looking for?" className="form-control input-btn" value={searchInput} onChange={setInput} onKeyPress={onKeyPress}/>
                 <Link to={{ pathname: "/search", search: `searchInput=${searchInput}` }} className="text-link" >
@@ -46,7 +46,7 @@ const LandingPage = (props) => {
                 </Link>
               </div>
             </div>
-            <div className="col-md-3">
+            <div className="col-2 col-sm-3">
             </div>
           </div>
           <br/><br/>
