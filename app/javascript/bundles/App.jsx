@@ -11,7 +11,7 @@ const App = (props) =>{
       <Switch>
         <Route exact path="/" render={() => <LandingPage tracks={tracks} />} />
         <Route path="/search" component={SearchColumn}/>
-        <Route path="/" component={LandingPage}/>
+        <Route path="/" render={() => <LandingPage tracks={tracks} />} />
       </Switch>
     </HashRouter>
   );
