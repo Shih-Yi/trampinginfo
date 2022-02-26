@@ -9,7 +9,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <%= form_for @report, url: track_reports_path(@track), html: { method: :post } do |f| %>
+        <%= form_for @report, url: track_reports_path(@track.object_key), html: { method: :post } do |f| %>
           <div class="form-group report-form-group">
             <%= f.select :report_type, @report_types, { include_blank: 'What happened?' }, { required: true } %>
           </div>

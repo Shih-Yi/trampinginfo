@@ -7,13 +7,13 @@ class ReportsController < ApplicationController
     @report.user = current_user
     @report.save!
     flash[:success] = "Create success"
-    redirect_to track_path(@track)
+    redirect_to track_path(@track.object_key)
   end
 
   private
 
   def set_track
-    @track = Track.find(params[:track_id])
+    @track = Track.find_by_object_key(params[:track_id])
   end
 
   def report_params
