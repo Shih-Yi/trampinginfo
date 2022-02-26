@@ -10,7 +10,9 @@ body.home-index{
     }
     .nav {
       .nav-link {
-        color: #fff;
+        color: $brand;
+        font-size: 1.2rem;
+        font-weight: 500;
       }
     }
     .animated-icon1 span {

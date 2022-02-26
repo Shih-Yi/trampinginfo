@@ -17,7 +17,7 @@ const PopularTracks = (props) => {
         </div>
         <div className="row">
           {tracks.map(track => (
-            <div className="col-md-4 card-box">
+            <div className="col-sm-4 card-box">
               <div className="card mb-4 shadow-sm">
                 <Image src={Pic} wrapped />
                 <div className="card-body">

@@ -292,7 +292,9 @@ class SearchResults extends Component {
           <div className='search-header-box'>
             <Grid>
               <Grid.Column>
-                <input id="searchInput" onChange={this.inputOnChange} />
+                <div class="input-group">
+                  <input id="searchInput" class="" onChange={this.inputOnChange} />
+                </div>
               </Grid.Column>
             </Grid>
           </div>

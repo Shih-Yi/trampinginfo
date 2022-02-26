@@ -397,6 +397,18 @@ a {
   flex-wrap: wrap;
 }
 
+#searchInput {
+  height: 40px;
+  border-radius: 0;
+  box-shadow: none;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  font-size: 16px;
+  transition: all .5s;
+  border-radius: 1rem;
+  margin: 0 0 0 5px;
+  padding: 9px 27px;
+}
+
 .search-column {
   .search-header-box {
     padding: 0 1.45rem;
