@@ -1,5 +1,6 @@
 require_relative "boot"
-
+# fix uninitialized constant ActiveSupport::LoggerThreadSafeLevel::Logger (NameError)
+require 'logger' 
 require "rails/all"
 
 # Require the gems listed in Gemfile, including any gems
