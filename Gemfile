@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.1'
+ruby '2.7.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.3', '>= 6.1.3.1'
@@ -25,7 +25,7 @@ gem 'jbuilder', '~> 2.7'
 # gem 'image_processing', '~> 1.2'
 
 # Flexible authentication solution for Rails with Warden
-gem 'devise', github: 'heartcombo/devise', branch: "master"
+gem 'devise', github: 'heartcombo/devise', branch: "main"
 # Facebook OAuth2 Strategy for OmniAuth
 gem 'omniauth-facebook'
 gem "omniauth-rails_csrf_protection", '~> 1.0'
@@ -68,7 +68,7 @@ group :development do
   gem 'rack-mini-profiler', '~> 2.0'
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
+  gem 'spring', '1.1.0'
   # A Ruby static code analyzer and formatter
   gem 'rubocop', require: false
   gem 'capistrano-rails'
@@ -91,4 +91,4 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'mini_racer', platforms: :ruby
+# gem 'mini_racer', platforms: :ruby
