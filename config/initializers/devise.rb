@@ -278,7 +278,7 @@ Devise.setup do |config|
                     site: "https://graph.facebook.com/v10.0",
                     authorize_url: "https://www.facebook.com/v10.0/dialog/oauth"
                   },
-                  scope: 'public_profile,email', info_fields: 'email,name,picture', image_size: { width: 500, height: 500 }
+                  scope: 'public_profile,email'
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
